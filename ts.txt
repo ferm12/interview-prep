@@ -1,0 +1,158 @@
+1. Explain TypeScript and its use?
+TypeScript is an open-source programming language, which acts as a statically-typed superset of JavaScript. By extending JavaScript with type annotations and interfaces, it enables developers to catch errors during the compilation process rather than at runtime, thus ensuring safer and more efficient code.
+
+TypeScript is also highly scalable, allowing for the development of large applications with features like namespaces, decorators, and abstract classes. One of its most significant strengths is its seamless integration with the JavaScript ecosystem and modern frameworks like Angular, React, or Vue.js, making it an invaluable tool for any developer looking to create maintainable and robust web applications.
+Scalable, readable, maintainable 
+
+2. Can you tell the names of some of the built-in types in TypeScript?
+In TypeScript, there are several built-in types available for developers to ensure safer, more accurate code. Some of the most common built-in types include:
+
+any: Represents any type of value and allows a variable to store multiple types.
+
+boolean: Represents a boolean value, which can be either true or false.
+
+number: Represents any numeric value, including integers and floating-point numbers.
+
+string: Represents a sequence of characters, commonly used for storing textual data.
+
+null: Represents the absence of a value intentionally assigned to a variable.
+
+undefined: Represents a variable that has not yet been assigned a value.
+
+void: Represents the lack of a type, commonly used as the return type for functions that do not return a value.
+
+________________________________________________________________________________________________________
+What are some TypeScript development skills with emphasis on secure coding practices and type safety
+_______________________________________________________________________________________________________
+
+
+Here’s a thorough breakdown of TypeScript development skills, especially focusing on type safety and secure coding practices, which are highly valued in modern software engineering:
+
+1️⃣ Strong Type System Knowledge
+
+Use TypeScript’s type system effectively:
+
+interface vs type
+
+Generics (<T>) for reusable, type-safe functions
+
+Union (string | number) and intersection types (A & B)
+
+Literal types ('admin' | 'user')
+
+Avoid using any unless absolutely necessary.
+
+Enforce strict mode ("strict": true in tsconfig.json) to catch errors early.
+
+Secure Coding Angle: Proper typing prevents runtime errors and unexpected values, which can be a source of security vulnerabilities.
+
+2️⃣ Type-Safe APIs and Data Handling
+
+Ensure type-safe communication between front-end and back-end.
+
+Examples:
+
+Fetching API data and validating it with zod or io-ts:
+
+import { z } from "zod";
+
+const userSchema = z.object({
+  id: z.number(),
+  username: z.string(),
+});
+
+async function getUser() {
+  const res = await fetch("/api/user");
+  const data = await res.json();
+  return userSchema.parse(data); // runtime validation + type inference
+}
+
+Prevent unsafe data assumptions (avoids injection attacks or crashes).
+
+3️⃣ Immutable and Safe Code Patterns
+
+Use readonly for constants or arrays that shouldn’t be mutated.
+
+Use const over let when possible.
+
+Prefer pure functions to reduce side effects.
+
+Secure Coding Angle: Immutable and predictable state reduces risk of accidental overwrites or state-based vulnerabilities.
+
+4️⃣ Proper Error Handling
+
+Use try/catch blocks with typed errors.
+
+Avoid catching any without checking type.
+
+try {
+  const data: User = await getUser();
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
+Secure Coding Angle: Prevents leaking sensitive info or crashing the app on unexpected data.
+
+5️⃣ Type-Safe Event and DOM Handling
+
+Strongly type event handlers in React or Node:
+
+function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  console.log(e.target.value);
+}
+
+Avoid unsafe casting (as any) or unchecked DOM access.
+
+6️⃣ Secure Dependencies and Module Usage
+
+Use type definitions (@types/*) rather than skipping type safety.
+
+Avoid importing unsafe libraries or functions.
+
+Keep dependencies updated and use TypeScript to ensure correct types for security-related libraries.
+
+7️⃣ Linting and Static Analysis
+
+Use ESLint + TypeScript plugin to catch potential security issues:
+
+no-explicit-any
+
+no-non-null-assertion
+
+Combine with SonarQube or CodeQL for security scanning.
+
+8️⃣ Type-Safe Authentication & Authorization
+
+Define user roles and permissions with literal types:
+
+type Role = 'admin' | 'user' | 'guest';
+interface User {
+  id: number;
+  role: Role;
+}
+
+Functions enforce roles at compile-time, reducing runtime privilege errors.
+
+9️⃣ Prevent Runtime Vulnerabilities
+
+Avoid eval() or unsafe JSON parsing.
+
+Validate input using typed schemas before processing.
+
+Leverage TypeScript to enforce non-null values (strictNullChecks) to prevent crashes.
+
+10️⃣ Tooling for Security & Type Safety
+
+TypeScript compiler: strict mode, noImplicitAny, strictNullChecks
+
+Schema validation libraries: zod, io-ts
+
+Linters: ESLint + TypeScript plugin
+
+Testing: Jest/Testing Library with typed mocks
+
+✅ Quick Summary for Interview
+
+“I focus on writing TypeScript with strict types, immutable and type-safe patterns, validated API responses, proper error handling, and typed authentication flows. I combine this with schema validation and static analysis tools to prevent runtime errors and security vulnerabilities.”

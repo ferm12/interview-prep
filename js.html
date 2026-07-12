@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+    pre {
+      background-color: #f5f5f5;
+      padding: 1em;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, Monaco, monospace;
+      color: #c7254e;
+    }
+</style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+        <a href=''></a>
+        <ul id="table-of-contents">
+            <li><a href='#what-are-the-major-features-of-react'>1. What are the major features of React?</a></li>
+            <li><a href='#what-is-jsx'>What is JSX?</a></li>
+
+        </ul>
+        <ul>
+            <li id='what-are-the-major-features-of-react'>
+                <h1>1. What are the major features of React?</h1>
+                <p>
+                    The major features of React are:
+
+                    Uses JSX syntax, a syntax extension of JS that allows developers to write HTML in their JS code.
+                    It uses Virtual DOM instead of Real DOM considering that Real DOM manipulations are expensive.
+                    Supports server-side rendering which is useful for Search Engine Optimizations(SEO).
+                    Follows Unidirectional or one-way data flow or data binding.
+                    Uses reusable/composable UI components to develop the view.
+                </p>
+                <a href="#table-of-contents">⬆ Table to contents</a>
+            </li>
+            <li id='what-is-jsx'>
+                <h1>2. What is JSX?</h1>
+                <p>
+                    JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the React.createElement(type, props, ...children) function, giving us expressiveness of JavaScript along with HTML like template syntax.
+
+                    In the example below, the text inside <h1> tag is returned as JavaScript function to the render function.
+
+                    <pre><code>
+                        export default function App() {
+                        return <div className="greeting">{"Hello, this is a JSX Code!"}</div>;
+                        }
+                    </code></pre>
+                    If you don't use JSX syntax then the respective JavaScript code should be written as below,
+
+                    <pre><code>
+                    import { createElement } from "react";
+
+                    export default function App() {
+                    return createElement(
+                        "h1",
+                        { className: "greeting" },
+                        "Hello, this is a JSX Code!"
+                    );
+                    }
+                    </code></pre>
+
+                </p>
+                <a href="#table-of-contents">⬆ Table to contents</a>
+            </li>
+        </ul>
+        <article id="1">
+            <p></p>
+        </article>
+    </body>
+</html>

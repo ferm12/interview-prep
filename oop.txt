@@ -1,0 +1,84 @@
+**************************************************************
+* The four pillars of Object-Oriented Programming (OOP) are: *
+**************************************************************
+A-PIE
+
+Abstraction:
+Abstraction is the process of hiding the implementation details of a class and exposing only the essential features. It allows you to focus on what an object does rather than how it does it. Abstract classes and interfaces are commonly used to achieve abstraction.
+
+Polymorphism:	
+Polymorphism allows objects to be treated as instances of their parent class rather than their actual class. It enables a single interface to represent different underlying forms (e.g., method overloading and method overriding).
+
+Inheritance:
+Inheritance allows a class (child class) to inherit properties and methods from another class (parent class). This promotes code reuse and establishes a relationship between classes. In Java, inheritance is achieved using the extends keyword.
+
+Encapsulation:
+Encapsulation is the concept of bundling data (fields) and methods (functions) that operate on the data into a single unit, typically a class. It also involves restricting direct access to some of the object's components, which is achieved using access modifiers like private, protected, and public.
+
+
+
+
+*********
+* SOLID *
+*********
+SOLID is an acronym for five design principles in Object-Oriented Programming (OOP) that help make software more maintainable, scalable, and robust. Here’s a breakdown:
+
+🔹 S – Single Responsibility Principle (SRP)
+A class should have only one reason to change, meaning it should have only one responsibility. This makes the class easier to understand and maintain.
+✅ Do one thing and do it well.
+Example: A class that handles both user authentication and data logging violates SRP. Split them into two classes.
+
+🔹 O – Open/Closed Principle (OCP)
+Software entities (classes, modules, functions) should be open for extension but closed for modification. This means you can add new functionality without altering existing code.
+✅ You should be able to add new behavior without changing existing code.
+Example: Use interfaces or abstract classes to allow future extensions.
+
+🔹 L – Liskov Substitution Principle (LSP)
+Subtypes must be substitutable for their base types without altering the correctness of the program. In other words, derived classes must be able to replace their base classes without breaking functionality.
+✅ If a subclass replaces a superclass, it should behave correctly.
+Example: If Bird has a fly() method, then a Penguin subclass shouldn't inherit it since penguins can't fly.
+
+🔹 I – Interface Segregation Principle (ISP)
+A class should not be forced to implement interfaces it does not use. Instead of one large interface, create smaller, more specific interfaces.
+✅ Prefer many small, specific interfaces over one large general-purpose interface.
+Example: Don’t force a class to implement methods it doesn't need.
+
+🔹 D – Dependency Inversion Principle (DIP)
+High-level modules should not depend on low-level modules. Both should depend on abstractions. Additionally, abstractions should not depend on details; details should depend on abstractions.
+✅ Depend on interfaces or abstract classes, not concrete implementations.
+Example: Instead of a class depending directly on a MySQLDatabase, have it depend on a DatabaseInterface.
+
+
+*****************************
+* What Are Design Patterns? *
+*****************************
+Design patterns are reusable solutions to common problems in software design. They provide a template for solving issues in a way that is proven and efficient. Design patterns are broadly categorized into three types:
+
+Creational Patterns: Focus on object creation mechanisms, trying to create objects in a manner suitable to the situation. 
+Abstract Factory
+Builder
+Factory Method
+Prototype
+Singleton
+
+Structural Patterns: Deal with object composition and relationships to ensure that if one part of a system changes, the entire structure doesn't need to
+Adapter
+Bridge
+Composite
+Decorator
+Facade
+Flyweight
+Proxy
+
+Behavioral Patterns: Focus on communication between objects and how responsibilities are distributed. 
+Chain of Responsibility
+Command
+interpreter
+iterator
+Mediator
+Memento
+Observer
+State
+Strategy
+Template Method
+Visitor

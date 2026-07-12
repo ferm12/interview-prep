@@ -1,0 +1,106 @@
+What is node.js 
+Node.js is a runtime environment that I allows you to run javascript in the server. It uses chrome v8 javascript run engine. 
+
+What is the difference between Node.js vs javascript
+
+How does node.js work internally
+V8 engine
+The v8 engine executes Javascript code quickly 
+
+Libuv Library 
+Libuv handles background tasks like reading files, making API calls, or handling requests
+
+Why is Node.js single-threaded
+Node.js uses a single main thread, meaning it handles all requests in one flow instead of creating a new thread for every user.
+Light-weight, super-Efficient 
+-uses one main thread 
+-handles many users using asynchronous processing 
+-saves memory and increases speed
+
+Why is Node.js popular today?
+Node.js is popular because it makes development faster and simple. It's also very fast, easy to scale, and has thousands of pre-build libraries on npm. 
+
+-one language is enough for everything 
+-super fast and lightweight 
+-Big community and npm support
+-great for real-time apps
+
+How to write a simple "Hello World" server in Node.js
+
+const http = require('http');
+
+const server = htt.createServer((req, res) => {
+	res.writeHead(200, {'Content-Type': 'text/plain'});
+	res.end('Hello World!');
+});
+
+server.listen(300, () =>{
+	console.log('Server running at http://localhost:3000');
+});
+
+What is synchronous vs asynchronous programming?
+Synchronous programming
+Synchronous means doing one task at a time - the next task starts only after the previous one fisnishes.
+Synchronous: reading one file then the next
+
+Asynchronous Programming 
+Asynchronous means doing multiple things at once - you don't wait for one task to finish before starting the next
+Asynchronous: reading all files together without waiting. 
+
+
+How does Node.js achieve asynchronous programing 
+Nodes.js handles asynchronous programming using callbacks, promises, and asynchronous/await
+Instructions to node JS to read a file to make a database call.
+Node JS sends the task to the background and move on
+
+What is the Event Loop and how does it manage request
+
+What is callback hell and how can you avoid 
+Callback hell happens when you write too many nested callback functions in your code - it looks messy and hard to understand 
+To solve this problem : use Promises, async/await, break your code int smaller, simpler functions.
+
+Intermediate 
+
+What are promises in Node.js
+Promises are better way to handle asynchronous operations in Node.js.
+Instead of using callbacks that can get messy, promises make the code cleaner and easier to read.
+A promise gives you the result later rather than blocking the main thread. 
+When you make a network request the promise gets registered in the browser web API with a status of PENDING. 
+When the request comes back, it could have one of the two states either resolve or reject.
+
+
+How does async/await improve asynchronous code?
+Asyn/await were introduced to make asynchronous code look and behave more like normal, synchronous code.
+Instead of Channing .then() and .catch(), you can just use await to pause execution until a promise resolves.
+-easy to read and debug, 
+-avoid callback hell,
+-handles async code in a more natural flow
+
+What is package.json and why is it important
+It stores important information about your app - like its name, version, dependencies, and scripts
+-it keeps track of all npm packages your project uses.
+-it allows you to run custom scripts (like npm start)
+
+Name five build-in modules of Node.js
+1. http - for creating web servers
+2. Fs - for working with the file system
+3. Path - for handling file and directory paths
+4. Os - for system info like memory and CPU
+5. Events - event-driven programming 
+
+
+What is middleware in Node.js?
+Middleware are functions that sit between the request and response cycle. They can check, modify, or even stop a request before it reaches the final route handler.
+-Loggin: Records details of incoming requests for monitoring and debugging
+-Authentication: verifies user identity before allowing access to protected routes
+-Error Handling:  Catches and manages errors to prevent server crashes. 
+
+
+What is module.exports and how it is used?
+In Node.js each file is treated as a separate module. If you want to use functions or variables from one file in another, you use modules.export to share them. 
+
+What is the difference between Express.js and Node.js
+Node.js
+Type - A runtime environment that lets Javascript run on the server.
+
+

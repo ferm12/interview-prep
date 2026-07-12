@@ -1,0 +1,2091 @@
+Javascript Inheritance 
+a+2^0(b), a+2^0(b)+2^1(b) ...
+======================
+function Baa() 
+{ 
+    this.colors = ["red", "blue", "green"]; 
+}
+
+function Foo()                              // Foo (child) inherits Baa (parent). Baa is been call in the context of this (Foo)
+{
+    Baa.call(this); 
+}
+
+var a1 = new Foo();
+a1.colors.push("black");
+alert(a1.colors)            // "red,blue,green,black"
+
+var a2 = new Foo();
+alert(a2.colors);           // "red,blue,green"o
+
+// Inheritance stack, Foo inherits Baa.
+     Baa 
+      |
+      V
+     Foo 
+
+Function greet(greeting){
+	console.log(`${greeting}, my name is ${this.name}`)
+}
+
+const person = {name: 'Alice'}
+
+greet.call(person, 'Hello')		// greet(child) inherits person(parent). Greet is been call in the context of this(person)
+// Inheritance stack, Foo inherits Baa.
+     peson(parent)
+      |
+      V
+     greet(child) 
+
+
+Post- and Pre- increment 
+======================================================================================================================================================================================================
+++j increments the value, then returns it.
+
+i++ returns the value, then increments it
+======================================================================================================================================================================================================
+
+
+setTimeout(()=>{}, delay) || clearTimeout(setTimeoutId)
+calls a function or evaluates an expression after a specified number of milliseconds.
+
+setInterval(()=>{}. Delay) || clearInterval(setIntervalId)
+calls a function or evaluates an expression at specified intervals (in milliseconds).
+
+======================================================================================================================================================================================================
+
+Closure is created when an outer function returns an inner function and the returning inner function remembers and has access to the variables from the scope in which it was defined, even after that outer function has finished executing 
+
+function outer(){
+	let temp = 'text';
+	return function inner(){
+		console.log(temp)
+	}
+}
+
+======================================================================================================================================================================================================
+
+
+function declaration 
+function() =>{}
+
+function expression
+Const fn = function(){}
+
+======================================================================================================================================================================================================
+***************
+* for in, key *
+***************
+Iterates over the keys
+Works for both objects && arrays
+const arr = ['a', 'b', 'c']
+for(let key in arr){
+	console.log(key, '=>', arr[key]) 
+	// 0 => a
+	// 1 => b
+	// 3 => c
+}
+
+const obj = {a:1, b:2, c:3}
+for(let key in obj){
+	console.log(key, '=>'. obj[key]) 
+	// a => 1
+	// b => 2
+	// c => 3
+}
+
+
+
+*****************
+* for of, value *
+*****************
+Iterate over the values
+It only works on arrays because you cannot iterate over an object.
+
+Const arr = ['a', 'b', 'c']
+for(let value of arr){
+	console.log(value)
+	// a
+	// b
+	// c
+}
+
+
+Const obj = {a:1, b:2, c:3}
+for(let [key, value] of Object.entries(obj)){
+	console.log(key, '=>', value)
+}
+// a => 1
+// b => 2
+// c => 3
+
+
+======================================================================================================================================================================================================
+filter, map, reduce, mutating vs non-mutating code, typescript, truthiness, loose vs strict equality, precedence, threads and promises and async/await, closures and scopes.
+
+Shallow-copy: a shallow copy means copying the top-level properties of an object or array, but not the nested objects. The new copy shares the same references for nested structures.
+Array
+
+STATIC METHOD
+Array.from()
+Array.from(arrayLike)
+Array.from(arrayLike, mapFn)
+Array.from(arrayLike, mapFn, thisArg)
+	The Array.from() static method creates a new, shallow-copied Array instance from an iterable or array-like object.
+
+	console.log(Array.from("foo"));
+	// Array ["f", "o", "o"]
+
+	console.log(Array.from([1, 2, 3], (x) => x + x));
+	// Array [2, 4, 6]
+
+Array.fromAsync()
+Array.fromAsync(arrayLike)
+Array.fromAsync(arrayLike, mapFn)
+Array.fromAsync(arrayLike, mapFn, thisArg)
+	The Array.fromAsync() static method creates a new, shallow-copied Array instance from an async iterable, iterable, or array-like object.
+
+	const asyncIterable = (async function* () {
+  		for (let i = 0; i < 5; i++) {
+    			await new Promise((resolve) => setTimeout(resolve, 10 * i));
+    			yield i;
+  		}
+	})();
+
+	Array.fromAsync(asyncIterable).then((array) => console.log(array));
+	// [0, 1, 2, 3, 4]
+	
+	Array.fromAsync(
+  		new Map([
+    			[1, 2],
+    			[3, 4],
+  		]),
+	.then((array) => console.log(array));
+	/ [[1, 2], [3, 4]]
+
+Array.isArray()
+Array.isArray(value)
+	The Array.isArray() static method determines whether the passed value is an Array.
+
+	console.log(Array.isArray([1, 3, 5]));
+	// true
+
+	console.log(Array.isArray("[]"));
+	// false
+
+	console.log(Array.isArray(new Array(5)));
+	// true
+
+	console.log(Array.isArray(new Int16Array([15, 33])));
+	// false
+
+
+Array.of()
+Array.of()
+Array.of(element1)
+Array.of(element1, element2)
+Array.of(element1, element2, /* …, */ elementN)
+	The Array.of() static method creates a new Array instance from a variable number of arguments, regardless of number or type of the arguments.
+
+	console.log(Array.of("foo", 2, "bar", true));
+	// Array ["foo", 2, "bar", true]
+
+	console.log(Array.of());
+	// Array []
+
+
+INSTANCE METHODS
+Array.prototype.at()
+Array.prototype.at(index)
+	The at() method of Array instances takes an integer value and returns the item at that index, allowing for positive and negative integers. Negative integers count back from the last item in the array.
+
+	const array1 = [5, 12, 8, 130, 44];
+
+	let index = 2;
+
+	console.log(`An index of ${index} returns ${array1.at(index)}`);
+	// "An index of 2 returns 8"
+
+	index = -2;
+
+	console.log(`An index of ${index} returns ${array1.at(index)}`);
+	// "An index of -2 returns 130"
+
+
+Array.prototype.concat()
+Array.prototype.concat(value1)
+Array.prototype.concat(value1, value2)
+Array.prototype.concat(value1, value2, /* …, */ valueN)
+	The concat() method of Array instances is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+
+	const array1 = ["a", "b", "c"];
+	const array2 = ["d", "e", "f"];
+	const array3 = array1.concat(array2);
+
+	console.log(array3);
+	// Array ["a", "b", "c", "d", "e", "f"]
+
+Array.prototype.copyWithin()
+Array.prototype.copyWithin(target, start)
+Array.prototype.copyWithin(target, start, end)
+	The copyWithin() method of Array instances shallow copies part of this array to another location in the same array and returns this array without modifying its length.
+
+	const array1 = ["a", "b", "c", "d", "e"];
+
+	// Copy to index 0 the element at index 3
+	console.log(array1.copyWithin(0, 3, 4));
+	// Array ["d", "b", "c", "d", "e"]
+
+	// Copy to index 1 all elements from index 3 to the end
+	console.log(array1.copyWithin(1, 3));
+	// Array ["d", "d", "e", "d", "e"]
+
+
+Array.prototype.entries()
+	The entries() method of Array instances returns a new array iterator object that contains the key/value pairs for each index in the array.
+
+	const array1 = ["a", "b", "c"];
+
+	const iterator1 = array1.entries();
+
+	console.log(iterator1.next().value);
+	// Expected output: Array [0, "a"]
+
+	console.log(iterator1.next().value);
+	// Expected output: Array [1, "b"]
+
+
+Array.prototype.every()
+Array.prototype.every(callbackFn)
+Array.prototype.every(callbackFn, thisArg)
+	The every() method of Array instances tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.
+
+	const isBelowThreshold = (currentValue) => currentValue < 40;
+
+	const array1 = [1, 30, 39, 29, 10, 13];
+
+	console.log(array1.every(isBelowThreshold));
+	// Expected output: true
+
+Array.prototype.fill()
+Array.prototype.fill(value)
+Array.prototype.fill(value, start)
+Array.prototype.fill(value, start, end)
+	The fill() method of Array instances changes all elements within a range of indices in an array to a static value. It returns the modified array.
+
+	const array1 = [1, 2, 3, 4];
+
+	// Fill with 0 from position 2 until position 4
+	console.log(array1.fill(0, 2, 4));
+	// Array [1, 2, 0, 0]
+
+	// Fill with 5 from position 1
+	console.log(array1.fill(5, 1));
+	// Array [1, 5, 5, 5]
+
+	console.log(array1.fill(6));
+	// Array [6, 6, 6, 6]
+
+Array.prototype.filter()
+Array.prototype.filter(callbackFn)
+Array.prototype.filter(callbackFn, thisArg)
+	The filter() method of Array instances creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+	const words = ["spray", "elite", "exuberant", "destruction", "present"];
+
+	const result = words.filter((word) => word.length > 6);
+
+	console.log(result);
+	// Array ["exuberant", "destruction", "present"]
+
+Array.prototype.find()
+Array.prototype.find(callbackFn)
+Array.prototype.find(callbackFn, thisArg)
+	The find() method of Array instances returns the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, undefined is returned.
+
+	If you need the index of the found element in the array, use findIndex().
+	If you need to find the index of a value, use indexOf(). (It's similar to findIndex(), but checks each element for equality with the value instead of using a testing function.)
+	If you need to find if a value exists in an array, use includes(). Again, it checks each element for equality with the value instead of using a testing function.
+	If you need to find if any element satisfies the provided testing function, use some().
+	If you need to find all elements that satisfy the provided testing function, use filter().
+
+	const array1 = [5, 12, 8, 130, 44];
+
+	const found = array1.find((element) => element > 10);
+
+	console.log(found);
+	// 12
+
+Array.prototype.findIndex()
+Array.prototype.findIndex(callbackFn)
+Array.prototype.findIndex(callbackFn, thisArg)
+	The findIndex() method of Array instances returns the index of the first element in an array that satisfies the provided testing function. If no elements satisfy the testing function, -1 is returned.
+
+	See also the find() method, which returns the first element that satisfies the testing function (rather than its index).
+	const array1 = [5, 12, 8, 130, 44];
+
+	const isLargeNumber = (element) => element > 13;
+
+	console.log(array1.findIndex(isLargeNumber));
+	// 3
+	
+Array.prototype.findLast()
+Array.prototype.findLast(callbackFn)
+Array.prototype.findLast(callbackFn, thisArg)
+	The findLast() method of Array instances iterates the array in reverse order and returns the value of the first element that satisfies the provided testing function. If no elements satisfy the testing function, undefined is returned.
+
+	If you need to find:
+
+	the first element that matches, use find().
+	the index of the last matching element in the array, use findLastIndex().
+	the index of a value, use indexOf(). (It's similar to findIndex(), but checks each element for equality with the value instead of using a testing function.)
+	whether a value exists in an array, use includes(). Again, it checks each element for equality with the value instead of using a testing function.
+	if any element satisfies the provided testing function, use some().
+	const array1 = [5, 12, 50, 130, 44];
+
+	const found = array1.findLast((element) => element > 45);
+
+	console.log(found);
+	// 130
+
+
+Array.prototype.findLastIndex()
+Array.prototype.findLast(callbackFn)
+Array.prototype.findLast(callbackFn, thisArg)
+	he findLastIndex() method of Array instances iterates the array in reverse order and returns the index of the first element that satisfies the provided testing function. If no elements satisfy the testing function, -1 is returned.
+
+	See also the findLast() method, which returns the value of last element that satisfies the testing function (rather than its index).
+
+	const array1 = [5, 12, 50, 130, 44];
+
+	const isLargeNumber = (element) => element > 45;
+
+	console.log(array1.findLastIndex(isLargeNumber));
+	// Expected output: 3
+	// Index of element with value: 130
+
+Array.prototype.flat()
+Array.prototype.flat(depthrrrrrrr
+	The flat() method of Array instances creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+	
+	const arr1 = [0, 1, 2, [3, 4]];
+
+	console.log(arr1.flat());
+	// Array [0, 1, 2, 3, 4]
+
+	const arr2 = [0, 1, [2, [3, [4, 5]]]];
+
+	console.log(arr2.flat());
+	// Array [0, 1, 2, Array [3, Array [4, 5]]]
+
+	console.log(arr2.flat(2));
+	// Array [0, 1, 2, 3, Array [4, 5]]
+
+		console.log(arr2.flat(Infinity));
+	// Array [0, 1, 2, 3, 4, 5]
+
+Array.prototype.flatMap()
+Array.prototype.latMap(callbackFn)
+Array.prototype.flatMap(callbackFn, thisArg)
+	The flatMap() method of Array instances returns a new array formed by applying a given callback function to each element of the array, and then flattening the result by one level. It is identical to a map() followed by a flat() of depth 1 (arr.map(...args).flat()), but 	slightly more efficient than calling those two methods separately.
+
+	const arr1 = [1, 2, 1];
+
+	const result = arr1.flatMap((num) => (num === 2 ? [2, 2] : 1));
+
+	console.log(result);
+	// Array [1, 2, 2, 1]
+
+Array.prototype.forEach()
+Array.prototype.forEach(callbackFn)
+Array.prototype.forEach(callbackFn, thisArg)
+	The forEach() method of Array instances executes a provided function once for each array element.
+	const array1 = ["a", "b", "c"];
+
+	array1.forEach((element) => console.log(element));
+
+	// "a"
+	// "b"
+	// "c"
+
+Array.prototype.includes()
+Array.prototype.includes(searchElement)
+Array.prototype.includes(searchElement, fromIndex)
+	The includes() method of Array instances determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+	const array1 = [1, 2, 3];
+
+	console.log(array1.includes(2));
+	// true
+
+	const pets = ["cat", "dog", "bat"];
+
+	console.log(pets.includes("cat"));
+	// true
+
+	console.log(pets.includes("at"));
+	// false
+
+Array.prototype.indexOf()
+Array.prototype.indexOf(searchElement)
+Array.prototype.indexOf(searchElement, fromIndex)
+	The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is not present.
+	const beasts = ["ant", "bison", "camel", "duck", "bison"];
+
+	console.log(beasts.indexOf("bison"));
+	// 1
+
+	// Start from index 2
+	console.log(beasts.indexOf("bison", 2));
+	// 4
+
+	console.log(beasts.indexOf("giraffe"));
+	// -1
+
+Array.prototype.join()
+Array.prototype.join(separator)
+	The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. If the array has only one item, then that item will be returned without using the separator.
+	const elements = ["Fire", "Air", "Water"];
+
+	console.log(elements.join());
+	// "Fire,Air,Water"
+
+	console.log(elements.join(""));
+	// "FireAirWater"
+
+	console.log(elements.join("-"));
+	// "Fire-Air-Water"
+
+
+Array.prototype.keys()
+	The keys() method of Array instances returns a new array iterator object that contains the keys for each index in the array.
+	const array1 = ["a", "b", "c"];
+	const iterator = array1.keys();
+
+	for (const key of iterator) {
+  		console.log(key);
+	}
+
+	// 0
+	// 1
+	// 2
+
+
+
+Array.prototype.lastIndexOf()
+Array.prototype.lastIndexOf(searchElement)
+Array.prototype.lastIndexOf(searchElement, fromIndex)
+	The lastIndexOf() method of Array instances returns the last index at which a given element can be found in the array, or -1 if it is not present. The array is searched backwards, starting at fromIndex.
+
+	const animals = ["Dodo", "Tiger", "Penguin", "Dodo"];
+
+	console.log(animals.lastIndexOf("Dodo"));
+	// Expected output: 3
+
+	console.log(animals.lastIndexOf("Tiger"));
+	// Expected output: 1
+
+Array.prototype.map()
+Array.prototype.map(callbackFn)
+Array.prototype.map(callbackFn, thisArg)
+	The map() method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.
+
+	const array1 = [1, 4, 9, 16];
+
+	// Pass a function to map
+	const map1 = array1.map((x) => x * 2);
+
+	console.log(map1);
+	// Array [2, 8, 18, 32]
+
+Array.prototype.pop()
+	The pop() method of Array instances removes the last element from an array and returns that element. This method changes the length of the array
+	const plants = ["broccoli", "cauliflower", "cabbage", "kale", "tomato"];
+
+	console.log(plants.pop());
+	// "tomato"
+
+	console.log(plants);
+	// Array ["broccoli", "cauliflower", "cabbage", "kale"]
+
+	plants.pop();
+
+	console.log(plants);
+	// Array ["broccoli", "cauliflower", "cabbage"]
+
+Array.prototype.push()
+Array.prototype.push(element1)
+Array.prototype.push(element1, element2)
+Array.prototype.push(element1, element2, /* …, */ elementN)
+	The push() method of Array instances adds the specified elements to the end of an array and returns the new length of the array.
+
+	const animals = ["pigs", "goats", "sheep"];
+
+	const count = animals.push("cows");
+	console.log(count);
+	// Expected output: 4
+	console.log(animals);
+	// Expected output: Array ["pigs", "goats", "sheep", "cows"]
+
+	animals.push("chickens", "cats", "dogs");
+	console.log(animals);
+	// Expected output: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
+
+Array.prototype.reduce()
+Array.prototype.reduce(callbackFn)
+Array.prototype.reduce(callbackFn, initialValue)
+	The reduce() method of Array instances executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of 	the array is a single value.
+
+	The first time that the callback is run there is no "return value of the previous calculation". If supplied, an initial value may be used in its place. Otherwise the array element at index 0 is used as the initial value and iteration starts from the next element (index 	1 instead of index 0).
+
+	const array1 = [1, 2, 3, 4];
+
+	// 0 + 1 + 2 + 3 + 4
+	const initialValue = 0;
+	const sumWithInitial = array1.reduce(
+  		(accumulator, currentValue) => accumulator + currentValue,
+  		initialValue,
+	);
+
+	console.log(sumWithInitial);
+	// 	
+
+Array.prototype.reduceRight()
+Array.prototype.reduceRight(callbackFn)
+Array.prototype.reduceRight(callbackFn, initialValue)
+	The reduceRight() method of Array instances applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value.
+
+	See also Array.prototype.reduce() for left-to-right.
+	const array1 = [
+  		[0, 1],
+  		[2, 3],
+  		[4, 5],
+	];
+
+	const result = array1.reduceRight((accumulator, currentValue) =>
+  		accumulator.concat(currentValue),
+	);
+
+	console.log(result);
+	// Expected output: Array [4, 5, 2, 3, 0, 1]
+
+
+Array.prototype.reverse()
+	The reverse() method of Array instances reverses an array in place and returns the reference to the same array, the first array element now becoming the last, and the last array element becoming the first. In other words, elements order in the array will be turned 	towards the direction opposite to that previously stated.
+
+	To reverse the elements in an array without mutating the original array, use toReversed().
+	const array1 = ["one", "two", "three"];
+	console.log("array1:", array1);
+	// "array1:" Array ["one", "two", "three"]
+
+	const reversed = array1.reverse();
+	console.log("reversed:", reversed);
+	// "reversed:" Array ["three", "two", "one"]
+
+	// Careful: reverse is destructive -- it changes the original array.
+	console.log("array1:", array1);
+	// "array1:" Array ["three", "two", "one"]
+
+
+
+Array.prototype.shift()
+	The shift() method of Array instances removes the first element from an array and returns that removed element. This method changes the length of the array.
+
+	const array1 = [1, 2, 3];
+
+	const firstElement = array1.shift();
+
+	console.log(array1);
+	// Array [2, 3]
+
+	console.log(firstElement);
+	// 1
+
+
+Array.prototype.slice()
+Array.prototype.slice(start)
+Array.prototype.slice(start, end)
+	The slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. The original array will not be modified.
+	const animals = ["ant", "bison", "camel", "duck", "elephant"];
+
+	onsole.log(animals.slice(2));
+	// Array ["camel", "duck", "elephant"]
+
+	console.log(animals.slice(2, 4));
+	// Array ["camel", "duck"]
+
+	console.log(animals.slice(1, 5));
+	// Array ["bison", "camel", "duck", "elephant"]
+
+	console.log(animals.slice(-2));
+	// Array ["duck", "elephant"]
+
+	console.log(animals.slice(2, -1));
+	// Array ["camel", "duck"]
+
+	console.log(animals.slice());
+	// Array ["ant", "bison", "camel", "duck", "elephant"]
+
+Array.prototype.some()
+Array.prototype.some(callbackFn)
+Array.prototype.some(callbackFn, thisArg)
+	The some() method of Array instances tests whether at least one element in the array passes the test implemented by the provided function. It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false. It 		doesn't modify the array.
+
+	const array = [1, 2, 3, 4, 5];
+
+	// Checks whether an element is even
+	const even = (element) => element % 2 === 0;
+
+	console.log(array.some(even));
+	// Expected output: true
+
+
+Array.prototype.sort()
+Array.prototype.sort(compareFn)
+	The sort() method of Array instances sorts the elements of an array in place and returns the reference to the same array, now sorted. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code 	unit 	values.
+
+	The time and space complexity of the sort cannot be guaranteed as it depends on the implementation.
+
+	To sort the elements in an array without mutating the original array, use toSorted().
+
+	const months = ["March", "Jan", "Feb", "Dec"];
+	months.sort();
+	console.log(months);
+	// Array ["Dec", "Feb", "Jan", "March"]
+
+	const array1 = [1, 30, 4, 21, 100000];
+	array1.sort();
+	console.log(array1);
+	// Array [1, 100000, 21, 30, 4]
+
+Array.prototype.splice()
+Array.prototype.splice(start, deleteCount)
+Array.prototype.splice(start, deleteCount, item1)
+Array.prototype.splice(start, deleteCount, item1, item2)
+Array.prototype.splice(start, deleteCount, item1, item2, /* …, */ itemN)
+	The splice() method of Array instances changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+
+	To create a new array with a segment removed and/or replaced without mutating the original array, use toSpliced(). To access part of an array without modifying it, see slice().
+
+	const months = ["Jan", "March", "April", "June"];
+	months.splice(1, 0, "Feb");
+	// Inserts at index 1
+	console.log(months);
+	// Array ["Jan", "Feb", "March", "April", "June"]
+
+	months.splice(4, 1, "May");
+	// Replaces 1 element at index 4
+	console.log(months);
+	// Array ["Jan", "Feb", "March", "April", "May"]
+
+
+Array.prototype.toLocaleString()
+Array.prototype.toLocaleString(locales)
+Array.prototype.toLocaleString(locales, options)
+	The toLocaleString() method of Array instances returns a string representing the elements of the array. The elements are converted to strings using their toLocaleString methods and these strings are separated by a locale-specific string (such as a comma ",").
+
+	const array1 = [1, "a", new Date("21 Dec 1997 14:12:00 UTC")];
+	const localeString = array1.toLocaleString("en", { timeZone: "UTC" });
+
+	console.log(localeString);
+	// "1,a,12/21/1997, 2:12:00 PM",
+	// This assumes "en" locale and UTC timezone - your results may vary
+
+Array.prototype.toReversed()
+	The toReversed() method of Array instances is the copying counterpart of the reverse() method. It returns a new array with the elements in reversed order.
+
+	const items = [1, 2, 3];
+	console.log(items); // [1, 2, 3]
+
+	const reversedItems = items.toReversed();
+	console.log(reversedItems); // [3, 2, 1]
+	console.log(items); // [1, 2, 3]
+
+Array.prototype.toSorted()
+Array.prototype.toSorted(compareFn)
+	The toSorted() method of Array instances is the copying version of the sort() method. It returns a new array with the elements sorted in ascending order.
+	const months = ["Mar", "Jan", "Feb", "Dec"];
+	const sortedMonths = months.toSorted();
+	console.log(sortedMonths); // ['Dec', 'Feb', 'Jan', 'Mar']
+	console.log(months); // ['Mar', 'Jan', 'Feb', 'Dec']
+
+	const values = [1, 10, 21, 2];
+	const sortedValues = values.toSorted((a, b) => a - b);
+	console.log(sortedValues); // [1, 2, 10, 21]
+	console.log(values); // [1, 10, 21, 2]
+
+Array.prototype.toSpliced()
+Array.prototype.toSpliced(start)
+Array.prototype.toSpliced(start, skipCount)
+Array.prototype.toSpliced(start, skipCount, item1)
+Array.prototype.toSpliced(start, skipCount, item1, item2)
+Array.prototype.toSpliced(start, skipCount, item1, item2, /* …, */ itemN)
+	The toSpliced() method of Array instances is the copying version of the splice() method. It returns a new array with some elements removed and/or replaced at a given index.
+	const months = ["Jan", "Mar", "Apr", "May"];
+
+	// Inserting an element at index 1
+	const months2 = months.toSpliced(1, 0, "Feb");
+	onsole.log(months2); // ["Jan", "Feb", "Mar", "Apr", "May"]
+
+	// Deleting two elements starting from index 2
+	const months3 = months2.toSpliced(2, 2);
+	console.log(months3); // ["Jan", "Feb", "May"]
+
+	// Replacing one element at index 1 with two new elements
+	const months4 = months3.toSpliced(1, 1, "Feb", "Mar");
+	console.log(months4); // ["Jan", "Feb", "Mar", "May"]
+
+	// Original array is not modified
+	console.log(months); // ["Jan", "Mar", "Apr", "May"]
+
+
+Array.prototype.toString()
+	The toString() method of Array instances returns a string representing the specified array and its elements.
+	const array1 = [1, 2, "a", "1a"];
+
+	console.log(array1.toString());
+	// "1,2,a,1a"
+
+
+Array.prototype.unshift()
+Array.prototype.unshift(element1)
+Array.prototype.unshift(element1, element2)
+Array.prototype.unshift(element1, element2, /* …, */ elementN)
+	The unshift() method of Array instances adds the specified elements to the beginning of an array and returns the new length of the array.
+
+	const array1 = [1, 2, 3];
+
+	console.log(array1.unshift(4, 5));
+	// 5
+
+	console.log(array1);
+	// Array [4, 5, 1, 2, 3]
+
+
+Array.prototype.values()
+	The values() method of Array instances returns a new array iterator object that iterates the value of each item in the array.
+	const array1 = ["a", "b", "c"];
+	const iterator = array1.values();
+
+	for (const value of iterator) {
+	  console.log(value);
+	}
+
+	// "a"
+	// "b"
+	// "c"
+
+Array.prototype.with()
+Array.prototype.with(index, value)
+	The with() method of Array instances is the copying version of using the bracket notation to change the value of a given index. 
+	It returns a new array with the element at the given index replaced with the given value.
+	const arr = [1, 2, 3, 4, 5];
+	console.log(arr.with(2, 6)); // [1, 2, 6, 4, 5]
+	console.log(arr); // [1, 2, 3, 4, 5]
+
+
+
+
+
+OBJECT
+Object.assign(target)
+Object.assign(target, source1)
+Object.assign(target, source1, source2)
+Object.assign(target, source1, source2, /* …, */ sourceN)
+	The Object.assign() static method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object.
+
+	Target
+	The target object — what to apply the sources' properties to, which is returned after it is modified. If a primitive value is provided as the target, it will be 	converted to an object.
+
+	source1, …, sourceN
+	The source object(s) — objects containing the properties you want to apply.
+
+	Return value
+	The target object.
+
+	Description
+	Properties in the target object are overwritten by properties in the sources if they have the same key. Later sources' properties overwrite earlier ones.
+
+	The Object.assign() method only copies enumerable and own properties from a source object to a target object. It uses [[Get]] on the source and [[Set]] on the target, 	so it will invoke getters and setters. Therefore it assigns properties, versus copying or defining new properties. This may make it unsuitable for merging new 	
+	properties into a prototype if the merge sources contain getters.
+
+	For copying property definitions (including their enumerability) into prototypes, use Object.getOwnPropertyDescriptor() and Object.defineProperty() instead.
+
+	Both String and Symbol properties are copied.
+
+	In case of an error, for example if a property is non-writable, a TypeError is raised, and the target object is changed if any properties are added before the 
+	error is raised.
+
+	Note: Object.assign() does not throw on null or undefined sources.
+
+
+Object.create(proto)
+Object.create(proto, propertiesObject)
+	The Object.create() static method creates a new object, using an existing object as the prototype of the newly created object.
+
+	proto
+	The object which should be the prototype of the newly-created object.
+
+	propertiesObject Optional
+	If specified and not undefined, an object whose enumerable own properties specify property descriptors to be added to the newly-created object, with the corresponding 	property names. These properties correspond to the second argument of Object.defineProperties().
+
+	Return value
+	A new object with the specified prototype object and properties.
+
+	const person = {
+	  isHuman: false,
+	  printIntroduction() {
+	    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+	  },
+	};
+
+	const me = Object.create(person);
+
+	me.name = "Matthew"; // "name" is a property set on "me", but not on "person"
+	me.isHuman = true; // Inherited properties can be overwritten
+
+	me.printIntroduction();
+	// Expected output: "My name is Matthew. Am I human? true"
+
+
+Object.defineProperties(obj, props)
+	The Object.defineProperties() static method defines new or modifies existing properties directly on an object, returning the object.
+
+	obj
+	The object on which to define or modify properties.
+
+	props
+	An object whose keys represent the names of properties to be defined or modified and whose values are objects describing those properties. Each value in props must be 	either a data descriptor or an accessor descriptor; it cannot be both (see Object.defineProperty() for more details).
+
+	Data descriptors and accessor descriptors may optionally contain the following keys:
+
+	configurable
+	true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object. Defaults to false.
+
+	enumerable
+	true if and only if this property shows up during enumeration of the properties on the corresponding object. Defaults to false.
+
+	A data descriptor also has the following optional keys:
+
+	value
+	The value associated with the property. Can be any valid JavaScript value (number, object, function, etc.). Defaults to undefined.
+
+	writable
+	true if and only if the value associated with the property may be changed with an assignment operator. Defaults to false.
+
+	An accessor descriptor also has the following optional keys:
+
+	get
+	A function which serves as a getter for the property, or undefined if there is no getter. 
+	The function's return value will be used as the value of the property. Defaults to undefined.
+
+	set
+	A function which serves as a setter for the property, or undefined if there is no setter. 
+	The function will receive as its only argument the new value being assigned to the property. Defaults to undefined.
+
+	If a descriptor has neither of value, writable, get and set keys, it is treated as a data descriptor.
+	If a descriptor has both value or writable and get or set keys, an exception is thrown.
+
+	Return value
+	The object that was passed to the function.
+
+	const object = {};
+
+	Object.defineProperties(object, {
+	  property1: {
+	    value: 42,
+	    writable: true,
+	  },
+	  property2: {},
+	});
+
+	console.log(object.property1);
+	// Expected output: 42
+
+
+Object.defineProperty(obj, prop, descriptor)
+	The Object.defineProperty() static method defines a new property directly on an object, or modifies an existing property on an object, and returns the object.
+
+	obj
+	The object on which to define the property.
+
+	prop
+	A string or Symbol specifying the key of the property to be defined or modified.
+
+	descriptor
+	The descriptor for the property being defined or modified.
+
+	Return value
+	The object that was passed to the function, with the specified property added or modified.
+
+	Description
+	Object.defineProperty() allows a precise addition to or modification of a property on an object. Normal property addition through assignment creates properties which show up during property enumeration (for...in, Object.keys(), etc.), whose values may be changed and which may be deleted. This method allows these extra details to be changed from their defaults. By default, properties added using Object.defineProperty() are not writable, not enumerable, and not configurable. In addition, Object.defineProperty() uses the [[DefineOwnProperty]] internal method, instead of [[Set]], so it does not invoke setters, even when the property is already present.
+
+	Property descriptors present in objects come in two main flavors: data descriptors and accessor descriptors. 
+	A data descriptor is a property with a value that may or may not be writable. An accessor descriptor is a property described by a getter-setter pair of functions.
+	A descriptor must be one of these two flavors; it cannot be both.
+
+	Both data and accessor descriptors are objects. They share the following optional keys (please note: the defaults mentioned here are in the case of
+	defining properties using Object.defineProperty()):
+
+	configurable
+	when this is set to false,
+
+	the type of this property cannot be changed between data property and accessor property, and
+	the property may not be deleted, and
+	other attributes of its descriptor cannot be changed (however, if it's a data descriptor with writable: true, the value can be changed, 
+	and writable can be changed to false).
+
+	Defaults to false.
+
+	enumerable
+	true if and only if this property shows up during enumeration of the properties on the corresponding object. Defaults to false.
+
+	A data descriptor also has the following optional keys:
+
+	value
+	The value associated with the property. Can be any valid JavaScript value (number, object, function, etc.). Defaults to undefined.
+
+	writable
+	true if the value associated with the property may be changed with an assignment operator. Defaults to false.
+
+	An accessor descriptor also has the following optional keys:
+
+	get
+	A function which serves as a getter for the property, or undefined if there is no getter. When the property is accessed, this function is called 
+	without arguments and with this set to the object through which the property is accessed (this may not be the object on which the property is 
+	defined due to inheritance). The return value will be used as the value of the property. Defaults to undefined.
+
+	set
+	A function which serves as a setter for the property, or undefined if there is no setter. When the property is assigned, this function is called with one 
+	argument (the value being assigned to the property) and with this set to the object through which the property is assigned. Defaults to undefined.
+
+	If a descriptor doesn't have any of the value, writable, get, and set keys, it is treated as a data descriptor. 
+	If a descriptor is both a data descriptor (because it has value or writable) and an accessor descriptor (because it has get or set), an exception is thrown.
+
+	These attributes are not necessarily the descriptor's own properties. Inherited properties will be considered as well. 
+	In order to ensure these defaults are preserved, you might freeze existing objects in the descriptor object's prototype chain upfront, 
+	specify all options explicitly, or create a null-prototype object.
+
+	const obj = {};
+	// 1. Using a null prototype: no inherited properties
+	const descriptor = Object.create(null);
+	descriptor.value = "static";
+
+	// not enumerable, not configurable, not writable as defaults
+	Object.defineProperty(obj, "key", descriptor);
+
+	// 2. Being explicit by using a throw-away object literal with all attributes present
+	Object.defineProperty(obj, "key2", {
+  	enumerable: false,
+  	configurable: false,
+  	writable: false,
+  	value: "static",
+	});
+
+	// 3. Prevents adding or removing the object prototype properties
+	// (value, get, set, enumerable, writable, configurable)
+	Object.freeze(Object.prototype);
+
+Object.entries(obj)
+	The Object.entries() static method returns an array of a given object's own enumerable string-keyed property key-value pairs.
+
+	obj
+	An object.
+
+	Return value
+	An array of the given object's own enumerable string-keyed property key-value pairs. Each key-value pair is an array with two elements: 
+	the first element is the property key (which is always a string), and the second element is the property value.
+
+	Description
+	Object.entries() returns an array whose elements are arrays corresponding to the enumerable string-keyed property key-value pairs found directly upon object. 
+	This is the same as iterating with a for...in loop, except that a for...in loop enumerates properties in the prototype chain as well. 
+	The order of the array returned by Object.entries() is the same as that provided by a for...in loop.
+
+	If you only need the property keys, use Object.keys() instead. If you only need the property values, use Object.values() instead.
+
+	const obj = { foo: "bar", baz: 42 };
+	console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+
+	const arrayLike = { 0: "a", 1: "b", 2: "c" };
+	console.log(Object.entries(arrayLike)); // [ ['0', 'a'], ['1', 'b'], ['2', 'c'] ]
+
+	const randomKeyOrder = { 100: "a", 2: "b", 7: "c" };
+	console.log(Object.entries(randomKeyOrder)); // [ ['2', 'b'], ['7', 'c'], ['100', 'a'] ]
+
+	// getFoo is a non-enumerable property
+	const myObj = Object.create(
+  		{},
+  		{
+    			getFoo: {
+      				value() {
+        				return this.foo;
+      				},
+    			},
+  		},
+	);
+	myObj.foo = "bar";
+	console.log(Object.entries(myObj)); // [ ['foo', 'bar'] ]
+
+
+Object.freeze(obj)
+	The Object.freeze() static method freezes an object. Freezing an object prevents extensions and makes existing properties non-writable and non-configurable. 
+	A frozen object can no longer be changed: new properties cannot be added, existing properties cannot be removed, their enumerability, configurability, writability, 
+	or value cannot be changed, and the object's prototype cannot be re-assigned. freeze() returns the same object that was passed in.
+
+	Freezing an object is the highest integrity level that JavaScript provides.
+
+	obj
+	The object to freeze.
+
+	Return value
+	The object that was passed to the function.
+
+Object.fromEntries(iterable)
+	The Object.fromEntries() static method transforms a list of key-value pairs into an object.
+
+	iterable
+	An iterable, such as an Array or Map, containing a list of objects. Each object should have two properties:
+
+	0
+	A string or symbol representing the property key.
+
+	1
+	The property value.
+
+	Typically, this object is implemented as a two-element array, with the first element being the property key and the second element being the property value.
+
+	Return value
+	A new object whose properties are given by the entries of the iterable.
+
+	Description
+	The Object.fromEntries() method takes a list of key-value pairs and returns a new object whose properties are given by those entries. 
+	The iterable argument is expected to be an object that implements an [Symbol.iterator]() method. The method returns an iterator object that produces two-element array-like objects. 
+	The first element is a value that will be used as a property key, and the second element is the value to associate with that property key.
+
+	Object.fromEntries() performs the reverse of Object.entries(), except that Object.entries() only returns string-keyed properties, while Object.fromEntries() can also 	create symbol-keyed properties.
+
+	Examples
+	Converting a Map to an Object
+	With Object.fromEntries, you can convert from Map to Object:
+
+	JS
+	Copy to Clipboard
+	const map = new Map([
+		["foo", "bar"],
+  		["baz", 42],
+	]);
+	const obj = Object.fromEntries(map);
+	console.log(obj); // { foo: "bar", baz: 42 }
+	Converting an Array to an Object
+	With Object.fromEntries, you can convert from Array to Object:
+
+	JS
+	const arr = [
+  		["0", "a"],
+  		["1", "b"],
+  		["2", "c"],
+	];
+	const obj = Object.fromEntries(arr);
+	console.log(obj); // { 0: "a", 1: "b", 2: "c" }
+	Object transformations
+	With Object.fromEntries, its reverse method Object.entries(), and array manipulation methods, you are able to transform objects like this:
+
+	JS
+	Copy to Clipboard
+	const object1 = { a: 1, b: 2, c: 3 };
+
+	const object2 = Object.fromEntries(
+  	Object.entries(object1).map(([key, val]) => [key, val * 2]),
+	);
+
+	console.log(object2);
+	// { a: 2, b: 4, c: 6 }
+
+Object.getOwnPropertyDescriptor(obj, prop)
+The Object.getOwnPropertyDescriptor() static method returns an object describing the configuration of a specific property on a given object (that is, one directly present on an object and not in the object's prototype chain). The object returned is mutable but mutating it has no effect on the original property's configuration.
+
+obj
+The object in which to look for the property.
+
+
+
+
+prop
+The name or Symbol of the property whose description is to be retrieved.
+
+Return value
+A property descriptor of the given property if it exists on the object, undefined otherwise.
+
+Description
+This method permits examination of the precise description of a property. A property in JavaScript consists of either a string-valued name or a Symbol and a property descriptor. Further information about property descriptor types and their attributes can be found in Object.defineProperty().
+
+A property descriptor is a record with some of the following attributes:
+
+value
+The value associated with the property (data descriptors only).
+
+writable
+true if and only if the value associated with the property may be changed (data descriptors only).
+
+get
+A function which serves as a getter for the property, or undefined if there is no getter (accessor descriptors only).
+
+set
+A function which serves as a setter for the property, or undefined if there is no setter (accessor descriptors only).
+
+configurable
+true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
+
+enumerable
+true if and only if this property shows up during enumeration of the properties on the corresponding object.
+
+
+Object.getOwnPropertyDescriptors(obj)
+	The Object.getOwnPropertyDescriptors() static method returns all own property descriptors of a given object.
+
+	obj
+	The object for which to get all own property descriptors.
+
+	Return value
+	An object containing all own property descriptors of an object. Might be an empty object, if there are no properties.
+
+	Description
+	This method permits examination of the precise description of all own properties of an object. A property in JavaScript consists of either a string-valued name or a 	Symbol and a property descriptor. Further information about property descriptor types and their attributes can be found in Object.defineProperty().
+
+	A property descriptor is a record with some of the following attributes:
+
+	value
+	The value associated with the property (data descriptors only).
+
+	writable
+	true if and only if the value associated with the property may be changed (data descriptors only).
+
+	get
+	A function which serves as a getter for the property, or undefined if there is no getter (accessor descriptors only).
+
+	set
+	A function which serves as a setter for the property, or undefined if there is no setter (accessor descriptors only).
+
+	configurable
+	true if and only if the type of this property descriptor may be changed and if the property may be deleted from the corresponding object.
+
+	enumerable
+	true if and only if this property shows up during enumeration of the properties on the corresponding object.
+
+	Examples
+	Creating a shallow copy
+	Whereas the Object.assign() method will only copy enumerable and own properties from a source object to a target object, 
+	you are able to use this method and 	Object.create() for a shallow copy between two unknown objects:
+
+	JS
+	Object.create(
+  		Object.getPrototypeOf(obj),
+  		Object.getOwnPropertyDescriptors(obj),
+	);
+	Creating a subclass
+	A typical way of creating a subclass is to define the subclass, set its prototype to an instance of the superclass, and then define properties on that instance. This 	can get awkward especially for getters and setters. Instead, you can use this code to set the prototype:
+
+	JS
+	function superclass() {}
+	superclass.prototype = {
+  		// Define the superclass constructor, methods, and properties here
+	};
+	function subclass() {}
+	subclass.prototype = Object.create(superclass.prototype, {
+  		// Define the subclass constructor, methods, and properties here
+	});
+
+
+Object.getOwnPropertyNames(obj)
+	The Object.getOwnPropertyNames() static method returns an array of all properties (including non-enumerable properties except for those which use Symbol) found 	directly in a given object.
+
+	obj
+	The object whose enumerable and non-enumerable properties are to be returned.
+
+	Return value
+	An array of strings that corresponds to the properties found directly in the given object.
+
+	Description
+	Object.getOwnPropertyNames() returns an array whose elements are strings corresponding to the enumerable and non-enumerable properties found directly in a given object 	obj. The ordering of the enumerable properties in the array is consistent with the ordering exposed by a for...in loop (or by Object.keys()) over the properties of the 	object. The non-negative integer keys of the object (both enumerable and non-enumerable) are added in ascending order to the array first, followed by the string keys 	in the order of insertion.
+
+	In ES5, if the argument to this method is not an object (a primitive), then it will cause a TypeError. In ES2015, a non-object argument will be coerced to an object.
+
+	JS
+	Copy to Clipboard
+	Object.getOwnPropertyNames("foo");
+	// TypeError: "foo" is not an object (ES5 code)
+
+	Object.getOwnPropertyNames("foo");
+	// ["0", "1", "2", "length"]  (ES2015 code)
+	Examples
+	Using Object.getOwnPropertyNames()
+	JS
+	Copy to Clipboard
+	const arr = ["a", "b", "c"];
+	console.log(Object.getOwnPropertyNames(arr).sort());
+	// ["0", "1", "2", "length"]
+
+	// Array-like object
+	const obj = { 0: "a", 1: "b", 2: "c" };
+	console.log(Object.getOwnPropertyNames(obj).sort());
+	// ["0", "1", "2"]
+	
+	Object.getOwnPropertyNames(obj).forEach((val, idx, array) => {
+	  console.log(`${val} -> ${obj[val]}`);
+	});
+	// 0 -> a
+	// 1 -> b
+	// 2 -> c
+
+	// non-enumerable property
+	const myObj = Object.create(
+	  {},
+	  {
+	    getFoo: {
+	      value() {
+ 	       return this.foo;
+	      },
+	      enumerable: false,
+	    },
+	  },
+	);
+	myObj.foo = 1;
+
+	console.log(Object.getOwnPropertyNames(myObj).sort()); // ["foo", "getFoo"]
+
+
+
+Object.keys(obj)
+	The Object.keys() static method returns an array of a given object's own enumerable string-keyed property names.
+
+	JS	
+	Object.keys(obj)
+	Parameters
+	obj
+	An object.
+
+	Return value
+	An array of strings representing the given object's own enumerable string-keyed property keys.
+
+	Description
+	Object.keys() returns an array whose elements are strings corresponding to the enumerable string-keyed property names found directly upon object. This is the same as 	iterating with a for...in loop, except that a for...in loop enumerates properties in the prototype chain as well. The order of the array returned by Object.keys() is 	the same as that provided by a for...in loop.
+
+	If you need the property values, use Object.values() instead. If you need both the property keys and values, use Object.entries() instead.
+
+	Examples
+	Using Object.keys()
+	JS
+	Copy to Clipboard
+	// Basic array
+	const arr = ["a", "b", "c"];
+	console.log(Object.keys(arr)); // ['0', '1', '2']
+
+	// Array-like object
+	const obj = { 0: "a", 1: "b", 2: "c" };
+	console.log(Object.keys(obj)); // ['0', '1', '2']
+
+	// Array-like object with random key ordering
+	const anObj = { 100: "a", 2: "b", 7: "c" };
+	console.log(Object.keys(anObj)); // ['2', '7', '100']
+
+	// getFoo is a non-enumerable property
+	const myObj = Object.create(
+		{},
+		{
+	    		getFoo: {
+      				value() {
+      	  				return this.foo;
+      				},
+    			},
+  		},
+	);
+	myObj.foo = 1;
+	console.log(Object.keys(myObj)); // ['foo']
+	If you want all string-keyed own properties, including non-enumerable ones, see Object.getOwnPropertyNames().
+
+
+Object.values(obj)
+	The Object.values() static method returns an array of a given object's own enumerable string-keyed property values.
+
+	obj
+	An object.
+
+	Return value
+	An array containing the given object's own enumerable string-keyed property values.
+
+	Description
+	Object.values() returns an array whose elements are values of enumerable string-keyed properties found directly upon object. This is the same as iterating with a 	for...in loop, except that a for...in loop enumerates properties in the prototype chain as well. The order of the array returned by Object.values() is the same as that 	provided by a for...in loop.
+
+	If you need the property keys, use Object.keys() instead. If you need both the property keys and values, use Object.entries() instead.
+
+	Examples
+	Using Object.values()
+	JS
+	Copy to Clipboard
+	const obj = { foo: "bar", baz: 42 };
+	console.log(Object.values(obj)); // ['bar', 42]
+
+	// Array-like object
+	const arrayLikeObj1 = { 0: "a", 1: "b", 2: "c" };
+	console.log(Object.values(arrayLikeObj1)); // ['a', 'b', 'c']
+
+	// Array-like object with random key ordering
+	// When using numeric keys, the values are returned in the keys' numerical order
+	const arrayLikeObj2 = { 100: "a", 2: "b", 7: "c" };
+	console.log(Object.values(arrayLikeObj2)); // ['b', 'c', 'a']
+
+	// getFoo is a non-enumerable property
+	const myObj = Object.create(
+  		{},
+  		{
+    			getFoo: {
+      				value() {
+        				return this.foo;
+      				},
+    			},
+  		},
+	);
+	myObj.foo = "bar";
+	console.log(Object.values(myObj)); // ['bar']
+
+
+
+
+
+
+
+
+
+JS Operator Precedence Table(from highest to lowest)
+
+Precedence	Operator Type			Operators				Associativity
+_____________________________________________________________________________________________________
+20		Grouping			(...)					N/A
+19		Member Access			.					Left-to-right
+19		Computed Member Access		[...]					Left-to-right
+19		new (with argument list)	new MyClass()				N/A
+18		Function Call			()					Left-to-right
+18		new (without argument list)	new MyClass				Right-to-left
+17		Postfix Increment/Decrement	x++, x--				N/A
+16		Logical NOT / Unary		!, +, -, ++x, --x, typeof, void, delete	Right-to-left
+15		Exponentiation			**					Right-to-left
+14		Multiplicative			*, /, %					Left-to-right
+13		Additive			+, -					Left-to-right
+12		Shift				<<, >>, >>>				Left-to-right
+11		Relational			<, <=, >, >=, in, instanceof		Left-to-right
+10		Equality			==, !=, ===, !==			Left-to-right
+9		Bitwise AND			&					Left-to-right
+8		Bitwise XOR			^					Left-to-right
+7		Bitwise OR			`	
+6		Logical AND			&&					Left-to-right
+5		Logical OR			`	
+4		Nullish Coalescing		??					Left-to-right
+3		Conditional (Ternary)		condition ? expr1 : expr2		Right-to-left
+2		Assignment			=, +=, -=, *=, etc.			Right-to-left
+1		Comma				,					Left-to-right
+
+Shadow down
+Is a web browser native API that allows you to build web components. This components hide and encapsulate javascript, css and markup inside a shadow DOM. It basically, gives you true components isolation. 
+
+-- How do “let” and “const” differ from var?
+The way let and const differ from var is the where these variables are available for use. var declarations are globally scoped or function/locally scoped. 
+Let on the other hand are blocked scoped. A block is considered to be the code bonded by {}. Anything within curly braces is a block. So a variable declared in a block with the let is only available for use within that block
+Like let declarations, const declarations can only be accessed within the block it was declared. Furthermore, const cannot be updated or re-declared, this means that value of a variable declared with const remains the same within its scope.
+
+-- Do you use them? What For?
+-- What sorts of bugs do these address?
+One of the bugs that let addresses is that there is less iniquity when declaring variables. Before if you declared variable using the var keyword inside a for loop that variable was available not only inside the for loop but also everywhere in the function containing the loop. This was a problem because we don’t hand the variables leaking out a for loop. 
+How would you improve the JavaScript language?
+I would improve the Javascript language by removing the automatic type conversion when comparing two unequal things,  because this breaks a fundamental operator in mathematics the equal operator(=). For example, when you compared numerical 1 with the string “1”, javascript has to do type conversion, because in order to compare two things they have to be of the same type. So, what javascript does is automatic type conversion by converting the string into a number. This is great but introduces a lot of ambiguity when trying to do a mathematical calculation such as addition. One of my favorite examples, is when you unconsciously let the language concatenate when you mean to do addition (“1” + 1). The way I would improve the language is to remove the automatic type conversion and instead trough an error when trying to compared two things of different type. This way we would remove a lot ambiguity from javascirpt and the language would be more reliable and developers be accountable for defining the correct types for their variables.   
+
+
+
+-- An HTML table has new rows inserted 10 times per second. As each new row is inserted the table grows, and the view must scroll to the bottom to see the new data.
+ Vue.js is being used to render the table. The performance of the table is inadequate, with CPU usage regularly going over > 100%, and you are asked to investigate.
+ What would your process be like? Where would you start?
+I would start opening chrome dev tools and under Performance I would start profiling the page for a couple of seconds. By performing a profiling on the page,
+I would be able assess better the table performance. Profiling the page would allow me to see a waterfall of network requests, animations (FPS), CPU and GPU 
+performance and much more. I can then dive deeply by zooming in a time lapse to see more in dept analysis.  
+
+Implement a modified Fibonacci  sequence using the following definition 
+t(i+2) = ti + t(i+1)^2
+
+Example 
+t1 =0
+t2 =1
+t3 = 0 + 1^2
+t4 = 1 + 1^2
+t5 = 1 + 2^2
+T6 = 2 + 5^2
+
+
+
+I have designed and developed complex widgets, dashboards, and data visualization components using React, TypeScript, Redux, and ECharts to monitor containerized servers in Kubernetes clusters. I rigorously tested components using Jest and Cypress, ensuring features were production-ready, high-performing, and aligned with user needs.
+
+3. Gathering Feedback from Users and Data:
+Through direct interaction with customer feedback and by analyzing system usage data (via Presto SQL queries across large datasets), I consistently refined workflows and prioritized feature enhancements based on real-world insights, helping ensure that delivered features addressed actual user pain points.
+
+4. Triage and Fix Bugs:
+As the owner of the UI container running in Kubernetes, I was responsible for developing, maintaining, and debugging the UI environment. I proactively triaged and resolved production bugs, optimized container deployment strategies, and implemented a backup system to minimize downtime, ensuring platform reliability.
+
+5. Team Collaboration, Documentation, and Code Quality:
+In leading a team of engineers, I have conducted code reviews to uphold high standards, generated detailed proposals (using meetings, documentation, and Figma) for multi-person projects, and worked closely with designers and developers to align the team on architecture and UI/UX decisions.
+I have extensive experience writing clear documentation and collaborating with cross-functional teams in Agile environments, ensuring transparent and efficient communication.
+
+cleintcare@businesssolver.com
+August 31 need to pay through that day.
+
+Feb 
+
+*******************************************
+* 🚀 ES6 (ECMAScript 2015) — New Features *
+*******************************************
+1. let and const
+Block-scoped variable declarations.
+let count = 1;
+const MAX = 10;
+let → reassignable
+const → cannot be reassigned
+No hoisting like var
+
+2. Arrow Functions
+Shorter syntax and lexical this.
+const add = (a, b) => a + b;
+Key difference:
+this is inherited from parent scope
+
+3. Template Literals
+Multi-line strings & interpolation.
+`Hello, ${name}!`
+Supports:
+Embedded expressions
+Tagged templates
+
+4. Default Parameters
+function greet(name = "Guest") {
+  return name;
+}
+
+5. Destructuring Assignment
+Array destructuring
+const [a, b] = [1, 2];
+Object destructuring
+const { id, name } = user;
+
+6. Enhanced Object Literals
+const user = {
+  name,
+  greet() {
+    return "Hi";
+  }
+};
+Features:
+Shorthand properties
+Method definitions
+Computed property names
+
+7. Spread Operator (...)
+const arr = [...a, ...b];
+Used for:
+Copying arrays/objects
+Function arguments
+Merging objects
+
+8. Rest Parameters
+function sum(...nums) {
+  return nums.reduce((a, b) => a + b);
+}
+
+9. Modules (import / export)
+export default function foo() {}
+import foo from "./foo";
+Supports:
+Named exports
+Default exports
+Tree shaking
+
+10. Classes
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+Syntactic sugar over prototypes.
+
+11. Promises
+new Promise((resolve, reject) => {
+  resolve("done");
+});
+Used for async operations.
+
+12. Symbol Type
+New primitive type.
+const id = Symbol("id");
+Used for:
+Unique object keys
+Preventing property collisions
+
+13. Iterators & for...of
+for (const value of arr) {
+  console.log(value);
+}
+Works with:
+Arrays
+Strings
+Maps
+Sets
+
+14. Generators
+function* gen() {
+  yield 1;
+  yield 2;
+}
+Used for:
+Lazy iteration
+Async flows (pre-async/await)
+
+15. Map
+const map = new Map();
+map.set("key", "value");
+Features:
+Any key type
+Maintains insertion order
+
+16. Set
+const set = new Set([1, 2, 3]);
+Features:
+Unique values
+Fast lookups
+
+17. WeakMap
+const wm = new WeakMap();
+Keys must be objects
+Garbage-collection friendly
+
+18. WeakSet
+const ws = new WeakSet();
+Stores objects only
+No iteration
+
+19. Object.assign()
+Object.assign(target, source);
+Used for shallow copies.
+
+20. Object.is()
+Object.is(NaN, NaN); // true
+More precise equality check.
+
+21. New Array Methods
+Array.from()
+Array.of()
+find()
+findIndex()
+fill()
+copyWithin()
+Example:
+arr.find(x => x > 5);
+
+22. New String Methods
+includes()
+startsWith()
+endsWith()
+repeat()
+
+23. New Number & Math Methods
+Number
+Number.isNaN()
+Number.isInteger()
+Math
+Math.trunc()
+Math.sign()
+Math.cbrt()
+
+24. Binary & Octal Literals
+0b1010; // 10
+0o755;  // 493
+
+25. Tail Call Optimization (Spec-Level)
+Proper tail calls (mostly not implemented in browsers)
+
+26. Proxy
+Intercept object operations.
+new Proxy(target, handler);
+Used for:
+Validation
+Logging
+Reactive frameworks
+
+27. Reflect
+Low-level object operations.
+Reflect.get(obj, prop);
+
+28. Intl (Internationalization API)
+new Intl.NumberFormat("en-US");
+For:
+Dates
+Numbers
+Currencies
+
+29. Unicode Improvements
+Better UTF-16 handling
+New string iteration behavior
+
+30. Block-Scoped Functions
+Functions scoped to blocks.
+🔑 ES6 Interview Summary
+ES6 modernized JavaScript with block scoping, modules, classes, promises, arrow functions, and powerful collection types like Map and Set, enabling cleaner, safer, and more maintainable code.
+
+*********************************************
+* 🚀 JavaScript Features After ES6 (ES2015) *
+*********************************************
+ES2016 (ES7) 
+1. Array.prototype.includes()
+[1, 2, 3].includes(2); // true
+Cleaner than indexOf.
+
+2. Exponentiation Operator (**)
+2 ** 3; // 8
+ES2017 (ES8)
+
+3. async / await
+const data = await fetch(url);
+Built on Promises — makes async code readable.
+
+4. Object.values() / Object.entries()
+Object.entries({ a: 1 });
+// [["a", 1]]
+
+5. String.prototype.padStart() / padEnd()
+"5".padStart(2, "0"); // "05"
+ES2018 (ES9)
+
+6. Rest / Spread for Objects
+const { a, ...rest } = obj;
+
+7. Promise.finally()
+fetch(url).finally(cleanup);
+
+8. Async Iteration (for await...of)
+for await (const chunk of stream) {}
+ES2019 (ES10)
+
+9. Array.prototype.flat() / flatMap()
+[1, [2, [3]]].flat(2);
+
+10. Object.fromEntries()
+Object.fromEntries([["a", 1]]);
+
+11. Optional catch Binding
+try {} catch {}
+ES2020 (ES11)
+
+12. Optional Chaining (?.)
+user?.profile?.name;
+
+13. Nullish Coalescing (??)
+value ?? "default";
+
+14. BigInt
+123n + 1n;
+
+15. Promise.allSettled()
+await Promise.allSettled(promises);
+
+16. globalThis
+globalThis.setTimeout;
+ES2021 (ES12)
+
+17. String.prototype.replaceAll()
+"aa".replaceAll("a", "b");
+
+18. Logical Assignment Operators
+a ||= b;
+a &&= b;
+a ??= b;
+
+19. Promise.any()
+Promise.any(promises);
+
+20. WeakRefs & FinalizationRegistry
+Advanced memory management.
+ES2022 (ES13)
+
+21. Class Fields (Public & Private)
+class User {
+  #id = 1;
+}
+
+22. Static Class Fields & Blocks
+static count = 0;
+static {}
+
+23. Top-Level await
+const data = await fetch(url);
+
+24. Error.cause
+throw new Error("msg", { cause });
+ES2023 (ES14)
+
+25. Array.prototype.findLast() / findLastIndex()
+arr.findLast(x => x > 5);
+
+26. Array.prototype.toSorted() / toReversed()
+arr.toSorted();
+(Immutable versions.)
+
+27. Hashbang (#!) Support
+#!/usr/bin/env node
+ES2024 (ES15)
+
+28. Object.groupBy() / Map.groupBy()
+Object.groupBy(users, u => u.role);
+
+29. RegExp v Flag (Unicode Sets)
+Advanced regex matching.
+🔑 Most Important Features for Real Work
+Must-know (daily use)
+async / await
+Optional chaining
+Nullish coalescing
+Spread/rest
+Promise combinators
+Class fields
+Advanced (senior-level)
+WeakRefs
+Top-level await
+Immutable array methods
+Private fields
+Async iteration
+🧠 Interview Summary (One-Liner)
+After ES6, JavaScript evolved with async/await, safer property access, better Promise handling, class improvements, immutability helpers, and memory-safe features, making large applications more maintainable and robust.
+
+
+*********************************************************
+* ✅ JavaScript Interview Questions & Answers (Top 100) *
+* 🟢 JavaScript Fundamentals (1–20)                     *
+*********************************************************
+1. What is JavaScript?
+JavaScript is a high-level, interpreted scripting language used to build interactive web applications.
+
+2. Is JavaScript single-threaded?
+Yes. JavaScript is single-threaded, but handles async operations via the event loop.
+
+3. What are primitive data types?
+string, number, boolean, null, undefined, symbol, bigint.
+
+4. Difference between null and undefined?
+undefined: variable declared, not assigned
+null: explicitly assigned empty value
+
+5. What is typeof null?
+typeof null === "object" // legacy bug
+
+6. What is hoisting?
+Variables and function declarations are moved to the top of scope during compilation.
+
+7. Difference between var, let, const?
+var: function-scoped
+let: block-scoped
+const: block-scoped, no reassignment
+
+8. What is a closure?
+A function that remembers variables from its lexical scope, even after the outer function finishes.
+
+9. What is lexical scoping?
+Scope is determined by where code is written, not where it’s executed.
+
+10. What is NaN?
+NaN means Not-a-Number, returned when a math operation fails.
+
+11. Difference between == and ===?
+==: loose equality (type coercion)
+===: strict equality
+
+12. What is type coercion?
+Automatic conversion of one data type to another.
+
+13. What is an IIFE?
+Immediately Invoked Function Expression.
+(function () {})();
+
+14. What is this?
+this refers to the execution context.
+
+15. How does this behave in arrow functions?
+Arrow functions do not have their own this.
+
+16. What is the global object?
+Browser: window
+Node.js: global
+
+17. What is strict mode?
+"use strict";
+Prevents silent errors and unsafe behavior.
+
+18. What is the DOM?
+Document Object Model — a tree representation of HTML.
+
+19. What is event bubbling?
+Events propagate from child → parent.
+
+20. What is event delegation?
+Handling events at a parent level instead of individual children.
+🟡 ES6+ & Modern JavaScript (21–50)
+
+21. What are arrow functions?
+Shorter syntax functions with lexical this.
+
+22. What is destructuring?
+Extract values from arrays or objects.
+
+23. What are template literals?
+Strings with interpolation using backticks.
+
+24. What is spread operator?
+const arr = [...a, ...b];
+
+25. What is rest operator?
+Collects remaining arguments.
+
+26. What are default parameters?
+Parameters with default values.
+
+27. What is optional chaining?
+obj?.prop
+
+28. What is nullish coalescing?
+value ?? default
+
+29. Difference between || and ???
+|| checks falsy; ?? checks null/undefined only.
+
+30. What are Promises?
+Objects representing eventual completion or failure.
+
+31. What are Promise states?
+pending, fulfilled, rejected.
+
+32. What is async/await?
+Syntax sugar over Promises for async code.
+
+33. What is Promise.all()?
+Resolves when all promises succeed, fails fast.
+
+34. What is Promise.allSettled()?
+Resolves when all promises complete, regardless of success.
+
+35. What is Promise.any()?
+Resolves on first fulfilled promise.
+
+36. What is Map?
+Key-value collection with any key type.
+
+37. What is Set?
+Collection of unique values.
+
+38. Difference between map() and forEach()?
+map() returns new array
+forEach() does not
+
+39. What is immutability?
+Not modifying original data structures.
+
+40. What is tree shaking?
+Removing unused code during bundling.
+
+41. What are modules?
+Code split using import and export.
+
+42. What is top-level await?
+Using await outside functions in modules.
+
+43. What are private class fields?
+class A { #x = 1 }
+
+44. What is Object.freeze()?
+Prevents object mutation.
+
+45. Difference between shallow and deep copy?
+Shallow copy copies references; deep copy copies values.
+
+46. What is structuredClone()?
+Native deep cloning API.
+
+47. What is debouncing?
+Delays function execution.
+
+48. What is throttling?
+Limits function execution rate.
+
+49. What is memoization?
+Caching function results.
+
+50. What is currying?
+Transforming a function into chained calls.
+🔴 Advanced & Senior-Level (51–100)
+
+51. What is the event loop?
+Mechanism that handles async callbacks.
+
+52. What is the call stack?
+Stack that tracks function execution.
+
+53. What is the microtask queue?
+Handles Promises (then, catch).
+
+54. Macro vs Micro tasks?
+Microtasks run before macrotasks.
+
+55. What is memory leak?
+Unreleased memory references.
+
+56. How does garbage collection work?
+Automatic memory cleanup using reachability.
+
+57. What is XSS?
+Injection of malicious JavaScript.
+
+58. What is CSRF?
+Unauthorized actions via authenticated sessions.
+
+59. What is CORS?
+Browser security mechanism for cross-origin requests.
+
+60. What is Same-Origin Policy?
+Restricts cross-origin access.
+
+61. What is Web Storage?
+localStorage
+sessionStorage
+
+62. Cookies vs localStorage?
+Cookies sent to server; localStorage is client-only.
+
+63. What is HttpOnly cookie?
+Prevents JS access.
+
+64. What is CSP?
+Content Security Policy to mitigate XSS.
+
+65. What is eval()?
+Executes strings as code (dangerous).
+
+66. What are Web Workers?
+Run JS in background threads.
+
+67. What is Shadow DOM?
+Encapsulated DOM for components.
+
+68. What is hydration?
+Attaching JS to server-rendered HTML.
+
+69. What is SSR?
+Server-side rendering.
+
+70. What is CSR?
+Client-side rendering.
+
+71. Difference between SSR and CSR?
+SSR is faster initial load; CSR is interactive.
+
+72. What is a virtual DOM?
+Lightweight DOM representation.
+
+73. What is reconciliation?
+Diffing virtual DOM updates.
+
+74. What is reflow?
+Layout recalculation.
+
+75. What is repaint?
+Visual update without layout changes.
+
+76. What is BigInt?
+Handles large integers safely.
+
+77. What is WeakMap?
+Object-keyed map without preventing GC.
+
+78. What is WeakSet?
+Stores objects weakly.
+
+79. What is Trusted Types?
+Prevents DOM-based XSS.
+
+80. What is feature detection?
+Checking support using in or typeof.
+
+81. What is polyfill?
+Adds missing features.
+
+82. What is transpiling?
+Converting modern JS to older versions.
+
+83. What is bundling?
+Combining files into one.
+
+84. What is code splitting?
+Loading code on demand.
+
+85. What is lazy loading?
+Deferring resource loading.
+
+86. What is dead code?
+Unused code.
+
+87. What is strict equality?
+No type coercion.
+
+88. What is function composition?
+Combining functions.
+
+89. What is the prototype chain?
+Inheritance mechanism.
+
+90. What is __proto__?
+Internal reference to prototype.
+
+91. What is Object.create()?
+Creates object with specified prototype.
+
+92. What is functional programming?
+Immutable, pure functions.
+
+93. What is side effect?
+Modifying external state.
+
+94. What is purity?
+Same input → same output.
+
+95. What is idempotency?
+Same operation → same result.
+
+96. What is race condition?
+Unpredictable async execution order.
+
+97. What is a memory heap?
+Unstructured memory storage.
+
+98. What is tail call optimization?
+Reusing stack frames.
+
+99. What is JavaScript sandboxing?
+Restricting execution capabilities.
+
+100. Why JavaScript is important?
+It powers web, mobile, backend, desktop, and embedded systems.
+
+Javascript 
+Troublesuring
+Experience in javascript logging error handling 
+Approach 
+Questions 
+Javascript coding 
+Questions 
+Retrieving data from a table
+Going query code modules, 
+How to get 
+How to when you solve a technical question 
+
+
+
+

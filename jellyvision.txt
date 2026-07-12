@@ -1,0 +1,62 @@
+What business problems does the Customer eXperience Tools app soft at Walmart
+
+The Customer experience Tools at Walmart is the system that organizes every product into a structured hierarchy so it can searched, filtered, priced, and managed correctly across stores, online systems, and internal tools.
+
+Walmart organizes products using hierarchical structure.
+
+
+1. Department
+Highest-level category
+Example: Electronics, Grocery, Apparel, Home
+
+2. Category
+A sub-group under each department
+Example (under Electronics): Computers, TVs, Cameras
+
+3. Sub-Category
+More specific grouping
+Example (under Computers): Laptops, Desktops, Tablets
+
+4. Item Type / Product Type
+Defines what the item specifically is
+This level affects how the product behaves in systems
+Example (under Laptops): Gaming Laptop, Chromebook, 2-in-1 Laptop
+
+5. Attributes
+Each item type has required and optional attributes:
+Color
+Size
+Weight
+Brand
+Nutritional details (for food)
+Material (for apparel)
+
+
+
+Walmart’s taxonomy determines:
+✔ Search Ranking
+
+Which items appear when customers search.
+✔ Filters & Facets
+
+What attributes (e.g., size, color, age range) show in search filters.
+✔ Pricing Logic
+
+Some categories have rules (e.g., MAP pricing for electronics).
+✔ Compliance Requirements
+
+Food, cosmetics, electronics all have different compliance metadata.
+✔ Item Setup Requirements
+
+Different categories require different mandatory attributes.
+✔ Shelf Labeling & Inventory Behavior
+
+
+The Customer eXperience Tools also has a item-condition-smart-dropdown feature 
+
+Where merchants can choose the item Condition (New, Refurbished, Returned, New-without-tag, etc)
+Eligibility rules (which items can be sold online or store-only)
+Which widgets and dashboards to show specific product data
+
+
+is a Taxonomy tool that I allows merchants to clasify items in different categories and departments called shelves. For example example a TV can be classified 

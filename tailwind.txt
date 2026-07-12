@@ -1,0 +1,51 @@
+
+Tailwind CSS is a utility-first CSS framework that allows developers to style applications using small, single-purpose redefined classes directly in HTML or JSX. 
+
+Unlike traditional frameworks like Bootstrap, it doesn’t provide prebuilt components; instead, it gives you low-level utilities for things like spacing, colors, typography, and layout. Tailwind is highly customizable, supports responsive design, dark mode, and state variants, and its JIT compiler ensures small, optimized CSS files, enabling fast UI development."
+
+1️⃣ Using @apply in your CSS (Use @apply for reusable sets of Tailwind classes.)
+
+Tailwind provides the @apply directive to compose multiple utility classes into one custom class.
+
+Example:
+.btn-primary {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600;
+}
+
+Then in your HTML:
+
+<button class="btn-primary">Click Me</button>
+
+✅ Benefits:
+
+Keeps HTML clean
+
+Reusable across multiple components
+
+Supports pseudo-classes like hover: and focus:
+
+
+
+
+
+2️⃣ Adding Custom Styles in tailwind.config.js
+
+You can extend Tailwind’s default theme to create custom classes or utilities.
+
+Example: Custom color
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brandBlue: '#1DA1F2',
+      },
+      spacing: {
+        72: '18rem',
+      },
+    },
+  },
+};
+
+Usage in HTML:
+
+<div class="bg-brandBlue p-72">Custom spacing and color</div>

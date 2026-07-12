@@ -1,0 +1,9 @@
+Npx create-nx-workspace@latest
+
+
+
+npx nx list @nx/react
+
+npx nx g @nx/react:app apps/<name> // apps/<name> is the path
+
+npx nx serve <app-nam>

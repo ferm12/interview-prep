@@ -1,0 +1,324 @@
+	View
+The basic building block for layout, similar to a <div> in web.
+
+Text
+Used to display text.
+
+Image
+Displays images.
+
+ScrollView
+A scrollable container for views and components.
+
+FlatList
+Efficiently renders large lists of data.
+
+SectionList
+Like FlatList, but for grouped sections of data.
+
+TextInput
+For user text input.
+
+TouchableOpacity, TouchableHighlight, Pressable
+For making elements touchable (buttons, links, etc.).
+
+Button
+A simple button component.
+
+SafeAreaView
+Renders content within the safe area boundaries of a device.
+
+Modal
+Displays content above an enclosing view (popups, dialogs).
+
+ActivityIndicator
+Shows a loading spinner.
+Flux
+
+         
+                                                                         +------+------+
+                                                            +------------|    Action   |<------------+
+                                                            |            +------+------+             |
+                                                            V                   |                    |
+            			+------+------+	     +-------------+     +--------------+     +--------------+
+            			|   Action.   | -->  | Dispatcher  | --> |    Store     | --> |     View     |
+            			+------+------+	     +------+------+     +--------------+     +--------------+
+
+
+
+                                                                         +------+------+
+                                                            +------------|    Action   |<------------+
+                                                            |            +------+------+             |
+                                                            V                   |                    |
+            			+------+------+	     +-------------+     +---------------+     +--------------+
+            			|   Action.   | -->  | Dispatch	   | --> |    Store      | --> |     View     |
+            			+------+------+	     +------+------+     +---------------+     +--------------+
+          						Middleware ->     Reducer -> state
+							Saga
+							thunk
+           
+
+Component	Purpose
+Action		Plain objects or functions that describe a user event or an intention to change state (e.g., "ADD_TODO").
+Dispatcher	A central hub that receives actions and forwards them to the relevant stores.
+Store		Holds the application's state and logic. It listens for actions and updates the state accordingly.
+View		Typically your React components, which render UI based on the state in the stores.
+
+
+Why Use Flux?
+Forces unidirectional data flow (easy to reason about)
+Clean separation of concerns
+Good for large-scale apps with complex state logic
+Inspired Redux, which simplified Flux and made it even more popular
+
+
+⚖️ Flux vs Redux
+
+Flux				Redux
+Multiple stores			Single global store
+Dispatcher is required		No dispatcher, pure reducers
+Stores have logic inside	Reducers are pure functions
+More flexible			More boilerplate, but predictable
+
+ Import React, {Component } from 'react'
+
+Export default class SampleComponent extends Component{
+
+}
+
+======================================================================================================
+useState
+function fn(){}
+
+const [todos, setTodos] = useState(fn()) // the fn runs on every render such as when you type on input box
+const [todos, setTodos] = useState(fn)   // passing a reference to the fn only runs during initialization. it does not run when the component re-renders. 
+======================================================================================================
+useEffect
+
+useEffect run after the components mounts. The cleaning function runs on unmount or before re-running 
+
+Runs after components mounts
+Runs asynchronously 
+Non-blocking IO of browser rendering
+Does not delay what the user sees
+======================================================================================================
+useEffectLayout
+
+Runs before components mounts
+Runs synchronously
+Blocking IO of the browser rendering 
+Block 
+
+useActionState
+======================================================================================================
+
+UseCallback
+======================================================================================================
+
+useContext
+======================================================================================================
+
+useDebugValue
+
+useDeferredValue
+
+
+
+useId
+
+useImperativeHandle
+
+useInsertionEffect
+
+useMemo
+
+useOptimistic
+
+useReducer
+
+useRef
+
+
+
+useSyncExternalStore
+
+useTransition
+
+
+What kind of problems are best addressed with React?
+
+✅ Problems Best Addressed with React
+    1. Complex, Interactive UIs
+        ◦ React makes it easier to build and manage complex UIs where elements update frequently (e.g., dashboards, forms, live feeds).
+    2. Reusable Components
+        ◦ Projects that benefit from a modular architecture where UI elements (like buttons, forms, modals) are reused across multiple pages or features.
+    3. Single-Page Applications (SPAs)
+        ◦ Apps that load once and dynamically update content without reloading the page (e.g., Gmail, Trello, Notion).
+    4. Real-Time Data Updates
+        ◦ Applications that fetch and display changing data (e.g., stock tickers, chat apps, notification systems).
+    5. Client-Side Rendering (CSR) + Server-Side Rendering (SSR)
+        ◦ With frameworks like Next.js, React supports both CSR and SSR for better performance and SEO.
+    6. Scalable Frontends
+        ◦ Projects that need to grow over time, with multiple developers working on different parts of the UI without conflicts.
+    7. Cross-Platform Development
+        ◦ React Native allows code reuse between web and mobile apps, making React ideal for teams building for multiple platforms.
+
+
+
+
+What kind of problems are better addressed by frameworks other than React?
+🚫 Problems Better Addressed by Frameworks Other Than React
+1. Full-Stack Out of the Box
+    • Better Option: Next.js, Nuxt.js (Vue), Laravel, Rails
+    • Why: React is just the view layer. If you need routing, SSR, APIs, and state handling all baked in, a full-stack framework is more efficient.
+2. Highly Opinionated Architecture
+    • Better Option: Angular
+    • Why: Angular provides a strict structure, dependency injection, TypeScript-first support, and out-of-the-box solutions for routing, HTTP, forms, and testing. Ideal for large teams that benefit from convention over configuration.
+3. Lightweight, Simpler Apps
+    • Better Option: Vue.js, Svelte
+    • Why: For small to medium apps with less complexity, Vue or Svelte can offer faster ramp-up time, smaller bundles, and more intuitive templating.
+4. Mobile-First Native Applications
+    • Better Option: Flutter
+    • Why: React Native is great for cross-platform apps, but Flutter provides better performance and more control over native UI when building mobile apps from scratch.
+5. Server-Heavy or Monolithic Backends
+    • Better Option: Django, Ruby on Rails
+    • Why: When most of the logic is server-side and the frontend is minimal, a traditional monolithic framework with templating (e.g., Django’s Jinja2) may be more efficient.
+6. Static Site Generation Without a SPA
+    • Better Option: Hugo, Jekyll
+    • Why: For blogs or documentation sites, static site generators offer lightning-fast performance without the overhead of a JS framework.
+
+How does components communicate in react 
+
+🔥 1. Parent → Child (Top-Down)
+Method: Props
+This is the most common and recommended way.
+Example:
+function Parent() {
+  return <Child message="Hello" />;
+}
+
+function Child({ message }) {
+  return <p>{message}</p>;
+}
+The parent sends data to the child using props.
+
+🔥 2. Child → Parent (Bottom-Up)
+Method: Passing callback functions from parent to child
+The parent provides a function; the child calls it.
+Example:
+function Parent() {
+  const handleClick = (value) => {
+    console.log("Child clicked", value);
+  };
+
+  return <Child onChildClick={handleClick} />;
+}
+
+function Child({ onChildClick }) {
+  return (
+    <button onClick={() => onChildClick("Hello parent!")}>
+      Click Me
+    </button>
+  );
+}
+This allows the child to send data or events back to the parent.
+
+🔥 3. Sibling → Sibling
+Siblings can’t talk directly; they communicate via their closest common parent.
+Methods:
+Lift state up to the parent
+Use a global store (Context, Redux, Zustand, jotai)
+Example using shared parent:
+function Parent() {
+  const [value, setValue] = useState("");
+
+  return (
+    <>
+      <SiblingA setValue={setValue} />
+      <SiblingB value={value} />
+    </>
+  );
+}
+
+
+
+🎯 Mouse Events
+React Event	Trigger
+onClick		Click
+onDoubleClick	Double click
+onMouseDown	Mouse button down
+onMouseUp	Mouse button up
+onMouseMove	Mouse move
+onMouseEnter	Enter element (no bubble)
+onMouseLeave	Leave element (no bubble)
+onMouseOver	Hover in
+onMouseOut	Hover out
+onContextMenu	Right-click
+
+⌨️ Keyboard Events
+React Event	Trigger
+onKeyDown	Key pressed
+onKeyUp		Key released
+onKeyPress	(Deprecated) Key pressed
+
+📱 Touch Events
+React Event	Trigger
+onTouchStart	Finger touches
+onTouchMove	Finger moves
+onTouchEnd	Finger removed
+onTouchCancel	System interrupts
+
+🖱️ Pointer Events
+React supports all pointer events:
+React Event
+onPointerDown
+onPointerUp
+onPointerMove
+onPointerEnter
+onPointerLeave
+onPointerOver
+onPointerOut
+onPointerCancel
+
+📝 Form Events
+React Event
+onChange
+onInput
+onSubmit
+onReset
+onInvalid
+onFocus
+onBlur
+onSelect
+onBeforeInput
+
+📋 Clipboard Events
+React Event
+onCopy
+onCut
+onPaste
+
+📦 Drag Events
+React Event
+onDrag
+onDragStart
+onDragEnd
+onDragEnter
+onDragLeave
+onDragOver
+onDrop
+
+🔄 Animation Events
+React Event
+onAnimationStart
+onAnimationEnd
+onAnimationIteration
+
+🔁 Transition Events
+React Event
+onTransitionEnd
+
+
+
+
+	

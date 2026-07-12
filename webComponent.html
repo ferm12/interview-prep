@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Component Example</title>
+</head>
+<body>
+
+  <!-- Using our custom element -->
+  <my-greeting></my-greeting>
+
+  <script>
+    class MyGreeting extends HTMLElement {
+      constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        shadow.innerHTML = `
+          <style>
+            p { color: green; }
+          </style>
+          <p>Hello from Web Component!</p>
+        `;
+        console.log(this)
+      }
+    }
+    console.log(MyGreeting)
+    // function findCompletePrefixes(names, queries) {
+    //     return queries.map(query => 
+    //         names.filter(name => 
+    //             name.startsWith(query) && name.length > query.length
+    //         ).length
+    //     );
+    // }
+    let names =['jackson', 'jacques', 'jack'];
+    let query = ['jack', 'jac'];
+
+    // let result1 = findCompletePrefixes(names, query);
+    // console.log(result1); // [2]
+
+    function findCompletePrefixes(names, queries) {
+      let namesString = [];
+
+      for (let i = 0; i < queries.length; i++) {
+        let current = i;
+        let counter = 0;
+        for (let j = 0; j < names.length; j++) {
+          // if (names[j].startsWith(queries[current]) && names[j].length > queries[current].length) {
+          if (names[j].includes(queries[current]) && names[j] !== queries[current]) {
+            counter = counter + 1;
+          }
+        }
+        namesString.push(counter);
+      }
+      return namesString;
+    }
+
+    let result = findCompletePrefixes(names, query);
+    console.log(result); // [2]
+
+
+
+
+    // Register the new element
+    customElements.define('my-greeting', MyGreeting);
+  </script>
+
+</body>
+</html>

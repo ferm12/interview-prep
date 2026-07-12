@@ -1,0 +1,121 @@
+Libraries like lcan help you drastically reduce developing time
+Agent 
+	undertand intet
+	store company KB in vertor db
+	perform internal db for product orders
+	generic answer based on products/company policy
+	chat history/memory
+
+transitional software		agent software: Decide to take action based on components 
+
+If ()				1-	2-	3-
+---					agent
+else ()				4-	5-	6-
+---
+				
+LangChain is a framework that helps developers build applications powered by Large Language Models (LLMs).
+It makes it much easier to create:
+chatbots
+RAG systems
+document search tools
+AI agents
+workflow automation using LLMs
+Instead of writing everything from scratch, LangChain gives you ready-to-use building blocks.
+
+🔵 What LangChain actually does (simple)
+LangChain provides:
+
+1. Document Loaders
+Read PDFs, Word docs, URLs, Notion, Google Drive, etc.
+
+2. Text Splitters
+Break long documents into chunks for embeddings.
+
+3. Embeddings
+Create vectors for each chunk (OpenAI, HuggingFace, Cohere, etc.)
+
+4. Vector Store Integrations
+Save and retrieve embeddings to/from:
+Pinecone
+Chroma
+Weaviate
+Qdrant
+FAISS
+
+5. Retrievers
+Search for relevant chunks using similarity search.
+
+6. LLM Wrappers
+Call models like:
+GPT
+Claude
+Llama
+Gemini
+Local models
+
+7. Chains
+Let you link multiple steps together:
+Example chain:
+Load docs → Split → Embed → Retrieve → LLM → Response
+
+8. Agents
+LLM that can:
+call tools
+use APIs
+search Google
+run code
+update databases
+
+
+React native
+React native with web and native development
+Feature 
+Functanlyty 
+
+Walmart and Hitachi React 
+
+Functionality per
+Service 
+What business problems does this product solve
+Talk about how do you comtributed 
+What was the functionality 
+Do you contribute 
+How long did you work for this 6 months 
+I consumed the back end 
+Fast API consumssution 
+How 
+Transparent about what you know and what you don't
+
+
+
+50%
+Confident don't say I think
+Professional
+Articles
+Voice them self's
+Is there is consistence
+The
+Don site back and do
+If they is something with user stories say
+How to display that confidence
+Make sure geared toward react native
+Think when some the was wrong 
+
+
+User story not complete 
+Is name a time when you notice a discrepancy  and you voice your self to correct it
+Collaborate, team player. 
+
+Voice yourself we need to correct 
+
+Examples 
+
+
+
+
+
+
+
+
+
+

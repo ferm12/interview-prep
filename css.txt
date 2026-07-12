@@ -1,0 +1,642 @@
+
+https://servicenow.zoom.us/j/92946107173?from=addon
+
+
+Tailwind CSS is a utility-first framework for rapidly building custom user interface. Instead of writing custom CSS classes, ou use pre-defined utility classes directly in your HTML to style your elements. These classes are low-level and map to individual CSS properties like margin, padding, color, flex, etc.
+
+Purpose	Example Class
+Padding		p-4, px-2, py-1
+Margin		m-2, mt-4, mx-auto
+Text Color	text-gray-800, text-red-500
+Background	bg-white, bg-blue-600
+Font Size	text-sm, text-xl
+Flex/Grid	flex, items-center, grid, gap-4
+Borders		border, rounded-md
+Hover/Focus	hover:bg-blue-700
+
+Flex
+
+Parent (Flex Container)
+display: 			flex | inline-flex;
+flex-direction: 		row|row-reverse|column|column-reverse|initial|inherit;
+flex-wrap: 			nowrap|wrap|wrap-reverse|initial|inherit;
+flex-flow: 			flex-direction flex-wrap|initial|inherit;
+justify-content: 		flex-start|flex-end|center|space-between|space-around|space-evenly|initial|inherit;
+align-items: 			normal|stretch|positional alignment|flex-start|flex-end|baseline|initial|inherit;
+align-content: 			stretch|center|flex-start|flex-end|space-between|space-around|space-evenly|initial|inherit;
+
+Children(Flex Items)
+order: <Integer>
+flex-grow: 			number|initial|inherit;
+flex-shrink: 			number|initial|inherit;
+flex-basis: 			number|auto|initial|inherit;
+flex: 				flex-grow flex-shrink flex-basis|auto|initial|inherit;
+
+
+
+
+1️⃣ Layout & Box Model
+display: 			block | inline | inline-block | flex | grid | none;
+position: 			static | relative | absolute | fixed | sticky;
+top|right|bottom|left: 		<length | % | auto>;
+box-sizing: 			content-box | border-box;
+width|height: 			auto | <length> | <percent>;
+min-width|max-width;
+min-height|max-height;
+margin: 			<length | % | auto>;
+padding: 			<length | %>;
+overflow: 			visible | hidden | scroll | auto;
+overflow-x | overflow-y;
+
+2️⃣ Flexbox
+display: 			flex;
+flex-direction: 		row | column | row-reverse | column-reverse;
+flex-wrap: 			nowrap | wrap | wrap-reverse;
+flex-flow: 			<direction> <wrap>;
+justify-content: 		flex-start | center | space-between | space-around | space-evenly;
+align-items: 			stretch | flex-start | center | flex-end | baseline;
+align-content: 			stretch | center | space-between;
+flex: 				<grow> <shrink> <basis>;
+flex-grow: 			number;
+flex-shrink: 			number;
+flex-basis: 			auto | <length>;
+align-self: 			auto | center | stretch;
+
+3️⃣ Grid
+display: 			grid;
+grid-template-columns: 		repeat(3, 1fr);
+grid-template-rows: 		auto;
+gap | row-gap | column-gap: 	<length>;
+grid-column: 			start / end;
+grid-row: 			start / end;
+grid-area: 			<name>;
+justify-items | align-items;
+justify-content | align-content;
+
+4️⃣ Typography & Text
+font-family: 			Arial, sans-serif;
+font-size: 			<length | % | keyword>;
+font-weight: 			normal | bold | 100–900;
+font-style: 			normal | italic;
+line-height: 			normal | number | <length>;
+letter-spacing: 		<length>;
+word-spacing: 			<length>;
+text-align: 			left | center | right | justify;
+text-decoration: 		none | underline | line-through;
+text-transform: 		uppercase | lowercase | capitalize;
+white-space: 			normal | nowrap | pre | pre-wrap;
+text-overflow: 			ellipsis;
+
+5️⃣ Colors & Backgrounds
+color: 				red | #fff | rgb() | hsl();
+opacity: 			0–1;
+background-color: 		<color>;
+background-image: 		url();
+background-repeat: 		repeat | no-repeat;
+background-position: 		center;
+background-size: 		cover | contain;
+background-attachment: 		fixed | scroll;
+
+6️⃣ Borders & Effects
+border: 			<width> <style> <color>;
+border-radius: 			<length | %>;
+box-shadow: 			x y blur spread color;
+text-shadow: 			x y blur color;
+outline: 			<width> <style> <color>;
+
+7️⃣ Transforms, Transitions & Animations
+Transforms
+transform: 			translate() rotate() scale() skew();
+transform-origin: 		center;
+Transitions
+transition: 			property duration timing-function delay;
+transition-duration: 		0.3s;
+transition-timing-function: 	ease | linear;
+Animations
+animation: 			name duration timing-function delay iteration-count direction;
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(100px); }
+}
+
+8️⃣ Visibility & Interaction
+visibility: 			visible | hidden;
+cursor: 			pointer | default | not-allowed;
+pointer-events: 		auto | none;
+user-select: 			none | text;
+
+9️⃣ Lists & Tables
+list-style: 			none | disc | decimal;
+list-style-position: 		inside | outside;
+table-layout: 			auto | fixed;
+border-collapse: 		collapse;
+
+🔟 Positioning & Stacking
+z-index: 			number;
+float: 				left | right | none;
+clear: 				both;
+
+1️⃣1️⃣ Responsive & Media
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+}
+aspect-ratio: 16 / 9;
+1️⃣2️⃣ Accessibility & UX
+caret-color: 			<color>;
+scroll-behavior: 		smooth;
+accent-color: 			<color>;
+
+
+
+
+
+
+🦁 Senior Web Developer (Brave-Style)
+Advanced CSS Interview Questions & Answers
+
+🦁 CSS Architecture & Scale (Critical for Brave)
+1. How do you structure CSS for a large, long-lived product?
+Component-based structure with scoped styles (CSS Modules), layered architecture (@layer), shared design tokens, and strict naming to avoid global leakage.
+
+2. Why is global CSS dangerous in large apps?
+It causes style leakage, specificity conflicts, and makes refactoring risky.
+
+3. When would you still use global CSS?
+For resets, typography, CSS variables, and design tokens.
+
+4. How do you avoid CSS regressions?
+Scoped styles, visual regression testing, and limiting selector depth.
+
+5. Why does Brave care about CSS size?
+Smaller CSS improves load time, reduces bandwidth, and respects user performance/privacy.
+
+🦁 Performance-Focused CSS (Very Important at Brave)
+6. What CSS properties trigger layout (reflow)?
+width, height, top, left, margin, padding.
+
+7. What properties are cheap to animate?
+transform and opacity (GPU-accelerated).
+
+8. How do you prevent layout shift (CLS)?
+Set explicit sizes, use aspect-ratio, reserve space for async content.
+
+9. What is critical CSS?
+Inlining above-the-fold styles to speed first paint.
+
+10. How does CSS affect battery life?
+Expensive animations, reflows, and repaints drain battery — especially on mobile.
+
+🦁 Modern Layout Mastery (Flexbox + Grid)
+11. When do you prefer Grid over Flexbox?
+For two-dimensional layouts (rows + columns).
+
+12. What problem does min max() solve?
+Prevents layout breaking on small screens.
+
+13. What is subgrid?
+Allows child grids to align with parent grid tracks.
+
+14. Why use gap instead of margins?
+Cleaner spacing, no margin collapse, easier maintenance.
+
+15. How do you create fluid layouts without media queries?
+Using clamp(), min(), max(), and container queries.
+
+🦁 Responsive & Container-Based Design (Brave Uses This)
+16. Why are container queries better than media queries?
+They respond to component size, not viewport size.
+
+17. Example use case for container queries?
+Reusable cards that adapt inside sidebars or main content.
+
+18. What is clamp() used for?
+Fluid typography and spacing.
+
+19. How do you support ultra-wide and very small screens?
+Fluid units + constraints, not fixed breakpoints.
+
+20. Why does Brave avoid device-specific breakpoints?
+Too brittle; layout should adapt naturally.
+
+🦁 Accessibility (Non-Negotiable at Brave)
+21. How does CSS impact accessibility?
+Focus states, contrast, motion, visibility.
+
+22. Why is :focus-visible preferred?
+Shows focus only for keyboard users.
+
+23. How do you respect motion sensitivity?
+Use @media (prefers-reduced-motion: reduce).
+
+24. Why is display: none problematic?
+Removes content from screen readers.
+
+25. How do you ensure readable text?
+Relative units, sufficient contrast, max line length.
+
+🦁 Modern Selectors (Expected Senior Knowledge)
+26. What does :has() enable?
+Parent-based styling without JavaScript.
+
+27. Why is :where() powerful?
+Zero specificity — safe defaults.
+
+28. Difference between :is() and :where()?
+:is() keeps specificity; :where() removes it.
+
+29. When do selectors hurt performance?
+Deep, complex selectors on large DOMs.
+
+30. Why avoid descendant selectors?
+Fragile and slower.
+
+🦁 CSS Variables & Theming (Brave Uses Heavily)
+31. Why use CSS variables over preprocessors?
+They work at runtime and can be updated dynamically.
+
+32. How do you implement dark mode?
+CSS variables + prefers-color-scheme.
+
+33. Why are CSS variables good for privacy?
+No JS required for theme switching.
+
+34. Where should design tokens live?
+:root or theme scopes.
+
+35. Can CSS variables be animated?
+Yes, if they resolve to animatable values.
+
+🦁 Animations & UX
+36. Why should animations be subtle?
+Reduces cognitive load and battery usage.
+
+37. Difference between transition and animation?
+Transitions react to changes; animations run independently.
+
+38. What is will-change?
+Performance hint — use sparingly.
+
+39. Why avoid infinite animations?
+Battery drain and accessibility issues.
+
+40. How do you animate height?
+Use max-height or transform-based tricks.
+
+🦁 Privacy-Aware CSS (Unique to Brave Mindset)
+41. How does CSS leak information?
+Via visited link styling, media queries, fingerprinting.
+
+42. Why is :visited restricted?
+Prevents history sniffing.
+
+43. Why minimize third-party fonts?
+Avoids tracking and improves performance.
+
+44. Why self-host fonts?
+Privacy, reliability, performance.
+
+45. How can CSS reduce JS usage?
+Using :has(), container queries, details/summary.
+
+🦁 Fonts & Text Rendering
+46. What is font-display: swap?
+Shows fallback immediately, swaps later.
+
+47. What is FOIT vs FOUT?
+Invisible vs unstyled text.
+
+48. Why use system fonts?
+Faster, native look, privacy-friendly.
+
+49. What are variable fonts?
+Multiple styles in one file.
+
+50. How do you prevent layout shift from fonts?
+Font metrics overrides, fallback matching.
+
+🦁 CSS + React (Senior Level)
+51. CSS Modules vs styled-components?
+Modules = simpler, faster; CSS-in-JS = dynamic but heavier.
+
+52. How do you avoid hydration issues?
+Deterministic styles server/client.
+
+53. How do you share styles across components?
+Tokens + utilities.
+
+54. How do you prevent CSS duplication?
+Shared layers, common utilities.
+
+55. When is inline style acceptable?
+Dynamic values not expressible in CSS.
+
+🦁 Debugging & Edge Cases
+56. Why does position: sticky fail?
+Ancestor with overflow.
+
+57. Why doesn’t height: 100% work?
+Parent lacks height.
+
+58. Why does margin collapse happen?
+Vertical margins combine by design.
+
+59. How do you debug specificity issues?
+DevTools → computed styles.
+
+60. Best way to clear floats?
+Don’t use floats; use Flexbox/Grid.
+
+🦁 Future-Facing CSS (Brave Likes This)
+61. What is @layer?
+Explicit cascade control.
+
+62. Why is cascade control important?
+Predictability at scale.
+
+63. What is contain?
+Limits layout/paint scope.
+
+64. What is aspect-ratio used for?
+Prevent layout shifts.
+
+65. What CSS features reduce JS?
+:has(), container queries, details.
+
+🦁 Senior-Level Design Thinking
+66. How do you balance design and performance?
+Prefer native CSS over JS.
+
+67. How do you review CSS PRs?
+Check scope, performance, accessibility.
+
+68. How do you mentor juniors in CSS?
+Teach cascade, layout fundamentals.
+
+69. How do you future-proof CSS?
+Use standards, avoid hacks.
+
+70. What CSS mistakes do seniors avoid?
+Over-specificity, JS-heavy layouts.
+
+🦁 Brave-Style Final Questions
+71. Why does Brave care about independent layout logic?
+Reduces reliance on JS frameworks.
+
+72. Why prefer native browser features?
+Performance, security, privacy.
+
+73. How does CSS align with Brave’s mission?
+Fast, private, user-controlled UI.
+
+74. What makes CSS “senior-level”?
+Predictability, performance, maintainability.
+
+75. What excites you about modern CSS?
+Less JS, more power.
+
+**********************************************
+* 🦁 Senior Web Developer (Brave-Style).      *
+* Advanced CSS Interview Questions & Answers  *
+**********************************************
+1. CSS Architecture & Scale (Critical for Brave)
+1. How do you structure CSS for a large, long-lived product?
+Answer:
+Component-based structure with scoped styles (CSS Modules), layered architecture (@layer), shared design tokens, and strict naming to avoid global leakage.
+2. Why is global CSS dangerous in large apps?
+Answer:
+It causes style leakage, specificity conflicts, and makes refactoring risky.
+3. When would you still use global CSS?
+Answer:
+For resets, typography, CSS variables, and design tokens.
+4. How do you avoid CSS regressions?
+Answer:
+Scoped styles, visual regression testing, and limiting selector depth.
+5. Why does Brave care about CSS size?
+Answer:
+Smaller CSS improves load time, reduces bandwidth, and respects user performance/privacy.
+2. Performance-Focused CSS (Very Important at Brave)
+6. What CSS properties trigger layout (reflow)?
+Answer:
+width, height, top, left, margin, padding.
+7. What properties are cheap to animate?
+Answer:
+transform and opacity (GPU-accelerated).
+8. How do you prevent layout shift (CLS)?
+Answer:
+Set explicit sizes, use aspect-ratio, reserve space for async content.
+9. What is critical CSS?
+Answer:
+Inlining above-the-fold styles to speed first paint.
+10. How does CSS affect battery life?
+Answer:
+Expensive animations, reflows, and repaints drain battery — especially on mobile.
+3. Modern Layout Mastery (Flexbox + Grid)
+11. When do you prefer Grid over Flexbox?
+Answer:
+For two-dimensional layouts (rows + columns).
+12. What problem does minmax() solve?
+Answer:
+Prevents layout breaking on small screens.
+13. What is subgrid?
+Answer:
+Allows child grids to align with parent grid tracks.
+14. Why use gap instead of margins?
+Answer:
+Cleaner spacing, no margin collapse, easier maintenance.
+15. How do you create fluid layouts without media queries?
+Answer:
+Using clamp(), min(), max(), and container queries.
+4. Responsive & Container-Based Design (Brave Uses This)
+16. Why are container queries better than media queries?
+Answer:
+They respond to component size, not viewport size.
+17. Example use case for container queries?
+Answer:
+Reusable cards that adapt inside sidebars or main content.
+18. What is clamp() used for?
+Answer:
+Fluid typography and spacing.
+19. How do you support ultra-wide and very small screens?
+Answer:
+Fluid units + constraints, not fixed breakpoints.
+20. Why does Brave avoid device-specific breakpoints?
+Answer:
+Too brittle; layout should adapt naturally.
+5. Accessibility (Non-Negotiable at Brave)
+21. How does CSS impact accessibility?
+Answer:
+Focus states, contrast, motion, visibility.
+22. Why is :focus-visible preferred?
+Answer:
+Shows focus only for keyboard users.
+23. How do you respect motion sensitivity?
+Answer:
+Use @media (prefers-reduced-motion: reduce).
+24. Why is display: none problematic?
+Answer:
+Removes content from screen readers.
+25. How do you ensure readable text?
+Answer:
+Relative units, sufficient contrast, max line length.
+6. Modern Selectors (Expected Senior Knowledge)
+26. What does :has() enable?
+Answer:
+Parent-based styling without JavaScript.
+27. Why is :where() powerful?
+Answer:
+Zero specificity — safe defaults.
+28. Difference between :is() and :where()?
+Answer:
+:is() keeps specificity; :where() removes it.
+29. When do selectors hurt performance?
+Answer:
+Deep, complex selectors on large DOMs.
+30. Why avoid descendant selectors?
+Answer:
+Fragile and slower.
+7. CSS Variables & Theming (Brave Uses Heavily)
+31. Why use CSS variables over preprocessors?
+Answer:
+They work at runtime and can be updated dynamically.
+32. How do you implement dark mode?
+Answer:
+CSS variables + prefers-color-scheme.
+33. Why are CSS variables good for privacy?
+Answer:
+No JS required for theme switching.
+34. Where should design tokens live?
+Answer:
+:root or theme scopes.
+35. Can CSS variables be animated?
+Answer:
+Yes, if they resolve to animatable values.
+8. Animations & UX
+36. Why should animations be subtle?
+Answer:
+Reduces cognitive load and battery usage.
+37. Difference between transition and animation?
+Answer:
+Transitions react to changes; animations run independently.
+38. What is will-change?
+Answer:
+Performance hint — use sparingly.
+39. Why avoid infinite animations?
+Answer:
+Battery drain and accessibility issues.
+40. How do you animate height?
+Answer:
+Use max-height or transform-based tricks.
+9. Privacy-Aware CSS (Unique to Brave Mindset)
+41. How does CSS leak information?
+Answer:
+Via visited link styling, media queries, fingerprinting.
+42. Why is :visited restricted?
+Answer:
+Prevents history sniffing.
+43. Why minimize third-party fonts?
+Answer:
+Avoids tracking and improves performance.
+44. Why self-host fonts?
+Answer:
+Privacy, reliability, performance.
+45. How can CSS reduce JS usage?
+Answer:
+Using :has(), container queries, details/summary.
+10. Fonts & Text Rendering
+46. What is font-display: swap?
+Answer:
+Shows fallback immediately, swaps later.
+47. What is FOIT vs FOUT?
+Answer:
+Invisible vs unstyled text.
+48. Why use system fonts?
+Answer:
+Faster, native look, privacy-friendly.
+49. What are variable fonts?
+Answer:
+Multiple styles in one file.
+50. How do you prevent layout shift from fonts?
+Answer:
+Font metrics overrides, fallback matching.
+11. CSS + React (Senior Level)
+51. CSS Modules vs styled-components?
+Answer:
+Modules = simpler, faster; CSS-in-JS = dynamic but heavier.
+52. How do you avoid hydration issues?
+Answer:
+Deterministic styles server/client.
+53. How do you share styles across components?
+Answer:
+Tokens + utilities.
+54. How do you prevent CSS duplication?
+Answer:
+Shared layers, common utilities.
+55. When is inline style acceptable?
+Answer:
+Dynamic values not expressible in CSS.
+12. Debugging & Edge Cases
+56. Why does position: sticky fail?
+Answer:
+Ancestor with overflow.
+57. Why doesn’t height: 100% work?
+Answer:
+Parent lacks height.
+58. Why does margin collapse happen?
+Answer:
+Vertical margins combine by design.
+59. How do you debug specificity issues?
+Answer:
+DevTools → computed styles.
+60. Best way to clear floats?
+Answer:
+Don’t use floats; use Flexbox/Grid.
+13. Future-Facing CSS (Brave Likes This)
+61. What is @layer?
+Answer:
+Explicit cascade control.
+62. Why is cascade control important?
+Answer:
+Predictability at scale.
+63. What is contain?
+Answer:
+Limits layout/paint scope.
+64. What is aspect-ratio used for?
+Answer:
+Prevent layout shifts.
+65. What CSS features reduce JS?
+Answer:
+:has(), container queries, details.
+14. Senior-Level Design Thinking
+66. How do you balance design and performance?
+Answer:
+Prefer native CSS over JS.
+67. How do you review CSS PRs?
+Answer:
+Check scope, performance, accessibility.
+68. How do you mentor juniors in CSS?
+Answer:
+Teach cascade, layout fundamentals.
+69. How do you future-proof CSS?
+Answer:
+Use standards, avoid hacks.
+70. What CSS mistakes do seniors avoid?
+Answer:
+Over-specificity, JS-heavy layouts.
+15. Brave-Style Final Questions
+71. Why does Brave care about independent layout logic?
+Answer:
+Reduces reliance on JS frameworks.
+72. Why prefer native browser features?
+Answer:
+Performance, security, privacy.
+73. How does CSS align with Brave’s mission?
+Answer:
+Fast, private, user-controlled UI.
+74. What makes CSS “senior-level”?
+Answer:
+Predictability, performance, maintainability.
+75. What excites you about modern CSS?
+Answer:
+Less JS, more power.
+	
+	

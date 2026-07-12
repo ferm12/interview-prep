@@ -1,0 +1,145 @@
+
+Execute yml file on current directory and run container in -d detach mode
+docker compose up -d
+
+
+npx nx serve backend   
+Npx nx serve frontend
+Tuesday, May 27, 2025
+1:00 PM - 1:30 PM America/Los Angeles
+
+
+npx tsc backend/src/books/book.seed.ts
+node backend/src/books/book.seed.js
+
+Node
+require('crypto'),randomBytes(64).toString('hex')
+
+
+//working docker-compose.yml
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: nx_mongodb_container
+    restart: always
+    ports:
+      - "2717:27017"
+
+
+
+//
+services:
+  mongo:
+    image: mongo:latest
+    container_name: nx_mongodb_container
+    ports:
+      - "2717:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-seed:docker-entrypoint-initdb.d
+    environment:
+      MONGO_INITDB_DATABASE: test
+
+  backend:
+    build:
+      context: ./backend
+    command: npx nx serve backend
+    volumes:
+      - ./backend:/app
+    environment:
+      - DB_URL=mongodb://mongo:27017/test
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_SECRET_KEY_REFRESH=${JWT_SECRET_KEY_REFRESH}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./apps/frontend
+    command: npx nx serve frontend
+    volumes:
+      - ./apps/frontend:/app
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
+
+
+
+
+
+
+
+
+
+Dockerfile frontend
+# Use an official Node.js image as the base
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the frontend (assuming a React/Vue/Next.js app)
+RUN npm run build
+
+# Expose the port the app runs on (change if needed)
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]
+
+
+
+Dockerfile for backend
+# Use official Node.js LTS image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --production
+
+# Copy built dist folder
+COPY dist ./dist
+
+# Copy any other necessary files (e.g., .env, config)
+COPY .env ./
+
+# Expose the application's port (change if your app uses a different port)
+EXPOSE 3000
+
+# Start the Node.js app
+CMD ["node", "dist/main.js"]
+
+
+
+
+  "// targets": "to see all targets run: nx show project frontend --web",
+export NX_DAEMON=false; <your build command here>
+
+
+
+(Fu)
+

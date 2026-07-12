@@ -1,0 +1,308 @@
+
+Here are some common patterns in React development:
+
+1. Container and Presentational Components
+Container components handle state, data fetching, and logic.
+Presentational components focus on UI and receive data via props.
+
+2. Controlled and Uncontrolled Components
+Controlled components: Form elements whose value is controlled by React state.
+Uncontrolled components: Form elements that manage their own state internally (using refs).
+
+3. Higher-Order Components (HOC)
+Functions that take a component and return a new component with enhanced behavior.
+Example: withRouter, connect from Redux.
+
+4. Render Props
+A technique for sharing code between components using a prop whose value is a function.
+Example: <DataProvider render={data => <Child data={data} />} />
+
+5. Custom Hooks
+Reusable logic extracted into functions starting with use.
+Example: useFetch, useForm, useToggle.
+
+6. Compound Components
+Components that work together and share implicit state.
+Example: <Tabs><TabList /><TabPanels /></Tabs>
+
+7. Context API
+Provides a way to pass data deeply through the component tree without props drilling.
+Example: Theme, Auth, or Language context.
+
+8. State Management Patterns
+Using local state, Context API, or external libraries like Redux, Zustand, or Recoil.
+
+9. Error Boundaries
+Components that catch JavaScript errors anywhere in their child component tree.
+
+10. Code Splitting and Lazy Loading
+Using React.lazy and Suspense to load components only when needed.
+
+
+🏛️ What is ARIA?
+ARIA stands for Accessible Rich Internet Applications — it's a set of attributes that you can add to HTML to improve accessibility, especially for users relying on screen readers or assistive tech.
+
+🎯 What ARIA Does
+ARIA helps you describe:
+Roles: What an element is (button, dialog, etc.)
+States: Current condition (aria-expanded, aria-disabled, etc.)
+Properties: Additional info (aria-label, aria-describedby, etc.)
+It’s super useful for building custom UI components in React (like modals, dropdowns, tabs) that don’t use native HTML semantics.
+
+
+
+🏛️ What is ADA?
+ADA stands for the Americans with Disabilities Act — a U.S. civil rights law that prohibits discrimination against individuals with disabilities. Though originally focused on physical spaces, it also applies to digital experiences, including websites and apps.
+
+🎯 What is ADA Compliance for Websites?
+ADA compliance means your site or app is accessible to all users, including those with:
+
+Vision impairments (blindness, low vision, color blindness)
+Hearing impairments
+Motor skill limitations
+Cognitive disabilities
+It overlaps heavily with Web Content Accessibility Guidelines (WCAG) — the international standard for web accessibility
+
+
+
+
+
+
+
+import React, {Component} from 'react';
+export default class SampleComponent extends Component{
+componentDidMount() {
+    // Component did mount logic
+  }
+  render() {
+    return <div>Hello</div>;
+  }
+}
+
+import React, { useEffect } from 'react';
+const SampleComponent = () => {
+  useEffect(() => {
+    // Component did mount logic
+  }, [this]);
+
+  return ('Hello')
+
+}
+
+import React, { useState, useEffect } from 'react';
+export default function App() {
+  const[a, change_a] = useState(1);
+
+  useEffect(() => {
+    setTimeout(() => {
+      change_a((a) => a + 1);}, 1000);
+      if(a > 10) {
+        change_a((a) => 1);
+      }
+    });
+    return ({a});
+  }
+
+import React, { useState, useEffect } from 'react';
+export default function App() {
+  const[a, change_a] = useState(1);
+
+  useEffect(() => {
+    setTimeout(() => { change_a((a) => a + 1);}, 1000);
+      if(a > 11) {
+        change_a((a) => 1);
+      }
+    });
+    return ({a});
+  }
+
+import React, { useState, useEffect } from 'react';
+import { current } from 'immer';
+import { getMenuUtilityClass } from '@mui/material';
+import { initial } from 'lodash';
+import { arguments } from 'file-loader';
+import { of } from 'rxjs';
+import { SignalWifiOffSharp } from '@material-ui/icons';
+export default function App() {
+  const[a, change_a] = useState(1);
+  useState(() => {
+    setTimeout(() => { change_a((a) => a + 1);}, 1000);
+      if(a > 10) {
+        change_a((a) => 1);
+      }
+    });
+    return ({a});
+  }
+
+
+
+
+
+
+
+implement a class called MyClass. It should have a 
+private integer variable x, initialized to 0, and expose two methods.
+
+add(val) - increments the value of x by val
+getX() - returns the current value of x
+
+Note :  Variable x should be undefined if accessed directly by an instance of MyClass.
+
+
+there are n queries of either of 2 types.
+
+1 val: increment the value of the private variables x of an instance of val.
+2 Return the value of the private variable x of an instance.
+
+the provided stub code reads inputs, instantiates MyClass as needed, and calls the methods.
+
+for example, start with an instance of MyClass named myclass with the value of x initialized as 0. 
+calling add(5) increases the value of x to 5, and getX() returns the current value of x, which is 5.
+
+=================================================================================================================================
+
+
+implement a function partialXor(a,b,c) which returns 
+the bitwise xor of the arguments. the number of arguments
+can be 3 or fewer. if there are fewer than 3 arguments, it
+should return a partial function that will take the 
+remaining arguments. For example, if there are 2 
+arguments, it should return a partial function that takes 
+one more arguments. When a 3rd argument is supplied, it 
+finally returns the xor of all 3 arguments.
+
+for example, a=6, b=8, c=10. their bitwise xor equals 4.
+whether the call is partialXor(6,8)(10), partialXor(6)(8,10),
+or partialXor(6,8,10) should return 4.
+
+Sample input 1, 2, 3
+Output 0
+=================================================================================================================================
+
+sometimes it is necessary to filter a signal by frequency.e.g.
+to reduce noise outside of the expected frequency range.
+Filters can be stacked, allowing only the frequency within
+the range allowed by all filters to get through. for example
+three filters with ranges (10, 17), (13,15), and (13, 17) will only allow Signals
+between 13 and 15 to get through. given n signals frequencies
+and a series of m filters that let through
+frequencies in the range x to y, inclusive, determine the  
+number of signals that will get through the filters.
+there will be only one range where all the filters overlap.
+
+=================================================================================================================================
+
+
+SQL OPTIMAZATION
+
+1. Use Indexes Wisely
+Create indexes on columns used in WHERE, JOIN, and ORDER BY clauses.
+Avoid over-indexing, as too many indexes slow down INSERT/UPDATE/DELETE.
+
+2. Write Efficient Queries
+Select only the columns you need (SELECT column1, column2 instead of SELECT *).
+Use proper filtering in WHERE clauses to reduce result set size.
+Avoid unnecessary subqueries and use JOINs appropriately.
+
+3. Analyze Query Execution Plans
+Use EXPLAIN (MySQL/PostgreSQL) or SET SHOWPLAN_ALL ON (SQL Server) to see how the database executes your query.
+Look for full table scans, missing indexes, or expensive operations.
+
+4. Normalize and Denormalize Appropriately
+Normalize to reduce data redundancy.
+Denormalize for read-heavy workloads to reduce expensive joins.
+
+5. Avoid Functions on Indexed Columns
+Expressions like WHERE YEAR(date_column) = 2024 prevent index usage. Instead, use range queries:
+WHERE date_column >= '2024-01-01' AND date_column < '2025-01-01'
+
+6. Limit Result Sets
+Use LIMIT (MySQL/PostgreSQL) or TOP (SQL Server) to restrict the number of rows returned.
+
+7. Batch Updates/Inserts
+For large data changes, batch operations to avoid locking and resource spikes.
+
+8. Keep Statistics Updated
+Ensure database statistics are up-to-date so the query optimizer can make good decisions.
+	
+=================================================================================================================================
+
+Key SEO Optimization Techniques:
+
+Keyword Research:
+Find and use relevant keywords that your target audience is searching for.
+
+On-Page SEO:
+
+Use keywords in titles, headings, and content.
+Write unique meta titles and descriptions.
+Use descriptive, keyword-rich URLs.
+Optimize images with alt text.
+Use proper heading structure (H1, H2, H3).
+Technical SEO:
+
+Ensure your site loads quickly (page speed).
+Make your site mobile-friendly (responsive design).
+Use HTTPS (secure your site).
+Fix broken links and errors.
+Create and submit an XML sitemap.
+Content Quality:
+
+Publish high-quality, original, and useful content.
+Update content regularly.
+Use internal and external links.
+Backlinks:
+
+Get links from reputable, relevant websites to improve authority.
+User Experience:
+
+Make navigation easy.
+Improve readability and accessibility.
+Analytics & Monitoring:
+
+Use tools like Google Analytics and Google Search Console to track performance and fix issues.
+
+=================================================================================================================================
+
+Here are some common CACHING STRATEGIES used in software development:
+
+1. Cache-Aside (Lazy Loading)
+Data is loaded into the cache only when requested.
+If not in cache, load from the database, then store in cache.
+Common in Redis/Memcached setups.
+2. Read-Through
+Application reads data through the cache.
+If not present, cache loads from the database and returns to the app.
+Cache is responsible for fetching and storing.
+3. Write-Through
+Data is written to the cache and the database at the same time.
+Ensures cache and database are always in sync.
+Slightly slower writes, but consistent data.
+4. Write-Behind (Write-Back)
+Data is written to the cache first, then asynchronously written to the database.
+Faster writes, but risk of data loss if cache fails before writing to DB.
+5. Time-Based Expiry (TTL)
+Cached data expires after a set time (Time-To-Live).
+Ensures stale data is eventually refreshed.
+6. Least Recently Used (LRU) / Least Frequently Used (LFU)
+Cache evicts the least recently/frequently used items when full.
+Helps keep the most relevant data in cache.
+7. Cache Invalidation
+Strategies to remove or update cache when underlying data changes.
+Can be manual (explicitly delete/update) or automatic (on data change ev
+
+
+
+=================================================================================================================================
+
+Supermicro (Super Micro Computer, Inc.) is a company that designs and manufactures high-performance server and storage hardware. Their main products include:
+
+Servers: Rackmount, blade, tower, and GPU servers for data centers, cloud computing, AI, and enterprise applications.
+Motherboards: High-end motherboards for servers and workstations.
+Storage Systems: High-capacity, high-speed storage solutions.
+Networking Equipment: Switches and network interface cards.
+Embedded/IoT Solutions: Hardware for industrial and edge computing.
+Supermicro is known for customizable, energy-efficient, and scalable hardware used by enterprises, cloud providers, and research institutions.
+
+
+

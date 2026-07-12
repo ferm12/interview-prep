@@ -1,0 +1,138 @@
+🧱 HTML Semantics — What You Need to Know (Senior-Level)
+What “semantic HTML” means
+Semantic HTML uses elements that describe their meaning and role, not just how they look.
+This helps accessibility, SEO, performance, and maintainability.
+Think: structure and meaning first, styling second.
+
+🧠 Why Semantic HTML Matters
+✅ Accessibility (WCAG / ARIA)
+Screen readers rely on semantic elements
+Keyboard navigation works naturally
+Less ARIA needed when semantics are correct
+✅ SEO
+Search engines understand page structure
+Better indexing and ranking signals
+✅ Maintainability
+Clear intent for future developers
+Easier debugging and refactoring
+✅ Performance
+Fewer JS/ARIA hacks
+Better default browser behavior
+🧩 Core Semantic HTML Elements
+
+📄 Page Structure
+Element	Purpose
+<header>	Intro content, logo, nav
+<nav>	Main navigation links
+<main>	Primary page content (one per page)
+<section>	Thematic grouping of content
+<article>	Standalone, reusable content
+<aside>	Complementary content
+<footer>	Footer info, metadata
+
+📝 Text Semantics
+Element	Use
+<h1>–<h6>	Document outline
+<p>	Paragraph
+<strong>	Strong importance
+<em>	Emphasis
+<mark>	Highlight
+<time>	Dates/times
+<address>	Contact info
+
+📦 Content Grouping
+Element	Use
+<figure>	Self-contained media
+<figcaption>	Caption
+<blockquote>	Long quotations
+<cite>	Source reference
+<pre>	Preformatted text
+<code>	Inline code
+
+🧾 Lists
+Element	Use
+<ul>	Unordered list
+<ol>	Ordered list
+<li>	List item
+<dl>	Description list
+<dt>	Term
+<dd>	Definition
+
+🧑‍💻 Forms & Inputs
+Element	Why it matters
+<form>	Defines form context
+<label>	Accessibility
+<fieldset>	Group related fields
+<legend>	Fieldset label
+<button>	Better than <div>
+<input>	Typed user input
+<output>	Calculation results
+
+🎥 Media Semantics
+Element	Use
+<img>	Images (always use alt)
+<audio>	Audio
+<video>	Video
+<track>	Captions/subtitles
+🚫 What NOT to Do (Common Anti-Patterns)
+❌ Everything wrapped in <div>
+❌ Clickable <div> instead of <button>
+❌ Skipping heading levels
+❌ Using <br> for spacing
+❌ Styling-only markup
+
+✅ Semantic HTML vs ARIA
+Rule #1 of ARIA:
+If you can use a native HTML element, do not use ARIA.
+Example:
+❌ Bad
+<div role="button" tabindex="0">Submit</div>
+✅ Good
+<button>Submit</button>
+
+🧠 Document Outline Best Practices
+<main>
+  <h1>Page Title</h1>
+
+  <section>
+    <h2>Section Title</h2>
+    <article>
+      <h3>Article Title</h3>
+    </article>
+  </section>
+</main>
+✔️ One <h1> per page
+✔️ Logical heading order
+✔️ Nested sections make sense
+
+🔐 Accessibility & Semantics
+Built-in accessibility benefits:
+<button> supports keyboard by default
+<nav> landmarks
+<main> skip links
+<label> associations
+Screen Reader Landmarks:
+header
+nav
+main
+aside
+footer
+
+🧪 Semantic HTML Interview Questions
+Q: Difference between <section> and <article>?
+article = standalone, reusable
+section = thematic grouping
+Q: When to use <div>?
+Only when no semantic element fits
+Q: Why is semantic HTML better than ARIA roles?
+Native elements are more reliable and performant
+
+🏢 Brave / Senior Frontend Perspective
+For a Brave-style role, semantic HTML is critical because:
+Privacy-first → fewer JS hacks
+Accessibility-first → native behavior
+Performance-focused → minimal DOM complexity
+SEO for content-heavy sites like brave.com
+
+🧠 One-Line Senior Summary
+Semantic HTML conveys meaning and structure, enabling accessibility, SEO, and maintainability while reducing reliance on JavaScript and ARIA.

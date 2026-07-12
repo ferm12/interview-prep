@@ -1,0 +1,468 @@
+
+
+*********************************************************
+* How I Approach Resolving a Customer’s Technical Issue *
+*********************************************************
+
+I approach customer issues with a methodical, customer-first mindset, balancing urgency with root-cause analysis.
+
+Understand the Problem and Impact
+I start by listening carefully to the customer to fully understand the issue, the expected behavior, and the business impact. 
+I ask clarifying questions and confirm reproducibility so we’re aligned before diving into solutions.
+/Users/test/Documents/interview-prep/python.txt
+Reproduce and Gather Evidence
+I attempt to reproduce the issue in a controlled environment and collect relevant data—logs, metrics, screenshots, network traces, or browser profiles. 
+This helps avoid assumptions and keeps the investigation fact-based.
+
+Isolate the Root Cause
+I narrow the problem by testing hypotheses and eliminating variables. Depending on the issue, this could involve debugging code, profiling performance, inspecting API responses, or analyzing infrastructure behavior.
+
+Implement the Fix Safely
+Once the root cause is identified, I implement a targeted fix with minimal blast radius. 
+I ensure the solution aligns with existing architecture and follows best practices for security, performance, and maintainability.
+
+Validate and Communicate
+I verify the fix through testing and, when possible, confirm resolution with the customer. 
+Throughout the process, I keep stakeholders informed with clear, non-technical updates so expectations are managed.
+
+Prevent Recurrence
+After resolution, I look for ways to prevent the issue from happening again—adding monitoring, improving documentation, writing tests, or making architectural improvements.
+
+One-Sentence Summary
+“I focus on understanding the customer’s problem, reproducing it with data, fixing the root cause safely, and ensuring it doesn’t happen again.”
+
+
+**************************************************************************************************
+* Explain a time you diagnosed and solved a complex technical problem. (STAR format recommended) *
+**************************************************************************************************
+
+Situation
+At Hitachi Vantara, several customers reported performance issues with the Unified Compute Platform (UCP) web application. Specifically, 
+the login page and initial page load were intermittently slow, negatively impacting first impressions and usability.
+
+Task
+As part of the engineering team responsible for the UCP UI, my goal was to identify the root cause of the slow initial load and implement
+a solution that would improve performance without introducing regressions.
+
+Action
+I began by profiling the application using browser developer tools, focusing on the Network and Performance tabs during the initial page load.
+From the waterfall analysis, I discovered that:
+Large JavaScript bundles were being loaded upfront
+Critical login functionality was blocked by non-essential scripts
+The browser was waiting for large, monolithic files to download and parse before rendering
+
+To address this, I:
+Introduced Webpack code splitting to break the main bundle into smaller, feature-based chunks
+Ensured that only critical login-related code was loaded initially
+Deferred non-essential modules so they could be downloaded in parallel and loaded on demand
+This approach reduced blocking behavior and allowed the browser to optimize resource loading more efficiently.
+
+Result
+Significantly reduced initial page load time
+Improved login responsiveness and consistency
+Resolved customer complaints related to slow startup
+Delivered a better first-load user experience without changing backend behavior
+This optimization also laid the groundwork for future performance improvements by establishing a scalable bundling strategy.
+
+
+Optional One-Line Summary (if asked)
+“By profiling network performance and implementing Webpack code splitting, I reduced UCP’s initial page load time and eliminated customer-reported login delays.”
+
+
+*********************************************************
+* Handling Support Tickets & Clarifying Customer Issues *
+*********************************************************
+When handling support tickets, I focus on quick triage, clear communication, and root-cause resolution.
+
+Triage and prioritize tickets based on severity, customer impact, and business criticality.
+
+Clarify the issue early by asking targeted questions to understand expected vs. actual behavior, scope, and frequency.
+
+Reproduce the problem using provided steps, logs, screenshots, or environment details to avoid assumptions.
+
+Communicate clearly and proactively, translating technical findings into customer-friendly updates and setting realistic expectations.
+
+Collaborate with cross-functional teams (QA, backend, DevOps, product) when issues span multiple systems.
+
+Resolve the root cause, not just the symptoms, and document findings for future reference.
+
+Follow up with the customer to confirm resolution and ensure satisfaction.
+
+One-Line Interview Version
+“I triage support tickets by impact, clarify the issue with targeted questions, reproduce it with data, and resolve the root cause while keeping the customer informed.”
+
+
+
+****************************************************
+* How I Explain Technical Concepts in Simple Terms *
+****************************************************
+
+Start with the goal, not the technology
+I begin by explaining what problem we’re solving and why it matters, instead of diving into implementation details.
+
+Use analogies the audience already understands
+I compare technical concepts to everyday experiences so the idea feels familiar and intuitive.
+
+Avoid jargon and acronyms
+If technical terms are necessary, I explain them briefly in plain language.
+
+Break it into small pieces
+I explain one idea at a time and pause to confirm understanding before moving on.
+
+Focus on outcomes and impact
+I emphasize what changes for the user, the business, or the system—not just how the code works.
+
+Confirm understanding
+I ask simple check-in questions like, “Does that make sense?” or “Would you like a quick example?”
+
+Example Explanation (Performance Issue)
+Technical version:
+“We reduced the initial page load time by implementing Webpack code splitting to optimize JavaScript bundle delivery.”
+
+Simple version:
+“The page was slow because it was trying to download everything at once. We changed it so only what’s needed it loads first, and the rest loads in the background”
+
+
+
+******************************************************
+* Prioritization and Organization in a Support Queue *
+******************************************************
+
+I manage a support queue by combining impact-based prioritization, clear organization, and proactive communication.
+
+Triage by Severity and Impact
+I first categorize tickets based on customer impact:
+Critical (P1): System down, data loss, or security risk
+High (P2): Major functionality impaired with no workaround
+Medium/Low (P3/P4): Minor issues, cosmetic bugs, or questions
+
+Assess Scope and Urgency
+I consider how many customers are affected, whether there’s a workaround, and any contractual SLAs to ensure urgent issues are addressed first.
+
+Clarify Before Acting
+If a ticket lacks enough detail, I quickly follow up with targeted questions. This prevents wasted effort and helps resolve issues faster.
+
+Organize Work Efficiently
+Group related tickets to identify patterns or systemic issues
+Batch similar tasks when possible to reduce context switching
+Track ownership and next steps so nothing stalls
+
+Communicate Status Proactively
+I keep tickets updated with clear progress notes and realistic timelines, even when a fix is still in progress. 
+Customers value visibility as much as resolution.
+
+Reprioritize Dynamically`
+Priorities can change. I regularly re-evaluate the queue as new information, escalations, or production incidents come in.
+
+Close the Loop
+Once resolved, I confirm with the customer, document the solution, and flag recurring issues for long-term fixes or backlog items.
+One-Line Interview Version
+“I prioritize support tickets based on customer impact and urgency, clarify issues early, communicate proactively, and continuously reassess the queue as conditions change.”
+
+*************
+* Try-catch *
+*************
+try–catch is a programming construct used for error handling. It allows you to run code that might fail and gracefully handle errors instead of crashing the application.
+Basic Idea (Plain English)
+“Try to run this code. If something goes wrong, catch the error and decide what to do next.”
+Why try–catch Is Important
+Prevents application crashes
+Lets you handle unexpected situations safely
+Improves user experience with meaningful error messages
+Makes debugging and logging easier
+
+
+**************************************************************************************************************
+* JavaScript basics & DOM manipulation — e.g., retrieving data from a table, printing output, blocks/scopes. *
+**************************************************************************************************************
+
+Below is a clear, interview-ready overview of JavaScript basics and DOM manipulation, with practical examples for tables, output, and scope.
+
+1. JavaScript Basics
+Variables & Blocks (Scope)
+var a = 1;   // function-scoped (avoid)
+let b = 2;   // block-scoped
+const c = 3; // block-scoped, cannot be reassigned
+if (true) {
+  let x = 10;
+  const y = 20;
+}
+// x and y are NOT accessible here
+Key points:
+let and const respect block scope
+var leaks outside blocks → common source of bugs
+Prefer const by default, let when reassignment is needed
+
+2. DOM Manipulation Basics
+Selecting Elements
+document.getElementById("title");
+document.querySelector(".item");
+document.querySelectorAll("tr");
+Printing Output
+
+console.log("Debug output");
+alert("User message");
+document.body.innerHTML += "<p>Hello</p>";
+Better practice:
+const output = document.getElementById("output");
+output.textContent = "Hello World";
+
+3. Retrieving Data from an HTML Table
+Example Table
+<table id="users">
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Alice</td>
+    <td>30</td>
+  </tr>
+  <tr>
+    <td>Bob</td>
+    <td>25</td>
+  </tr>
+</table>
+Read Table Data
+const rows = document.querySelectorAll("#users tr");
+
+const data = [];
+
+rows.forEach((row, index) => {
+  if (index === 0) return; // skip header
+
+  const cells = row.querySelectorAll("td");
+  data.push({
+    name: cells[0].textContent,
+    age: Number(cells[1].textContent)
+  });
+});
+
+console.log(data);
+Output:
+[
+  { name: "Alice", age: 30 },
+  { name: "Bob", age: 25 }
+]
+
+4. Modifying the DOM
+Update Table Content
+document.querySelector("#users tr:nth-child(2) td:nth-child(2)")
+  .textContent = "31";
+Add a New Row
+const table = document.getElementById("users");
+const row = table.insertRow();
+row.insertCell().textContent = "Charlie";
+row.insertCell().textContent = "28";
+
+5. Event Handling
+document.getElementById("btn").addEventListener("click", () => {
+  console.log("Button clicked");
+});
+
+6. Common Pitfalls (Interview Favorites)
+Topic	Explanation
+Scope	let / const are block-scoped
+Hoisting	var is hoisted, let/const are not usable before declaration
+DOM access	Query DOM after it loads (DOMContentLoaded)
+Performance	Cache DOM queries when looping
+document.addEventListener("DOMContentLoaded", () => {
+  // Safe DOM access
+});
+
+7. One-Sentence Interview Answer
+“I use modern JavaScript with block-scoped variables, query and manipulate the DOM using querySelector, and safely retrieve and update data from tables while avoiding scope and performance pitfalls.”
+
+
+
+Below is a clear, interview-ready overview of ServiceNow platform knowledge, covering core modules, scripting, debugging, and key platform features, at a level appropriate for a senior or customer-facing engineer.
+1. Core ServiceNow Modules
+IT Service Management (ITSM)
+Most commonly used module set:
+Incident Management – Restore service quickly
+Problem Management – Identify root causes
+Change Management – Control and reduce risk of changes
+Request Management – Service catalog requests
+
+Service Catalog
+User-facing request forms
+Workflows / Flow Designer integrations
+Variables, UI policies, and approvals
+CMDB (Configuration Management Database)
+Stores CIs (servers, apps, services)
+Relationship mapping
+Dependency views for impact analysis
+Knowledge Management
+Internal and external knowledge bases
+Linked to incidents and requests
+Improves self-service and reduces ticket volume
+
+2. ServiceNow Scripting Fundamentals
+ServiceNow primarily uses server-side and client-side JavaScript.
+Business Rules (Server-Side)
+Run on the server during database operations.
+Common use cases:
+Auto-assign incidents
+Enforce data consistency
+Update related records
+// Before Insert Business Rule
+if (current.priority == 1) {
+  current.assignment_group = "Network Team";
+}
+Types:
+Before
+After
+Async
+Client Scripts (Client-Side)
+Run in the browser to control form behavior.
+Types:
+onLoad
+onChange
+onSubmit
+function onChange(control, oldValue, newValue) {
+  if (newValue == "high") {
+    g_form.setMandatory("justification", true);
+  }
+}
+Script Includes
+Reusable server-side logic.
+var IncidentUtils = Class.create();
+IncidentUtils.prototype = {
+  isCritical: function(incident) {
+    return incident.priority == 1;
+  },
+  type: "IncidentUtils"
+};
+UI Policies
+No-code alternative to client scripts
+Control visibility, mandatory fields, read-only state
+3. Debugging & Troubleshooting
+Server-Side Debugging
+System Logs → All
+gs.info(), gs.error()
+Business Rule Debugger
+gs.info("Business rule triggered for incident " + current.number);
+Client-Side Debugging
+Browser DevTools console
+console.log()
+g_form inspection
+Common Debugging Steps
+Verify execution order
+Check conditions and filters
+Disable scripts incrementally
+Use impersonation to test roles
+Confirm ACLs are not blocking access
+4. Platform Features & Capabilities
+Flow Designer
+Low-code workflow automation
+Replaces many legacy workflows
+Integrates with external systems via REST
+Notifications
+Email, SMS, push notifications
+Triggered by events or flows
+Templated and role-based
+Security & Access Control
+ACLs (table, field, record-level)
+Roles and groups
+Scoped applications
+Integrations
+REST APIs (Scripted REST APIs)
+MID Server for on-prem integrations
+Import Sets & Transform Maps
+Performance & Best Practices
+Avoid synchronous Business Rules when possible
+Prefer Script Includes over duplicated logic
+Minimize client scripts on large forms
+Use Async rules for non-blocking work
+5. One-Sentence Interview Summary
+“I have strong ServiceNow platform experience across ITSM modules, CMDB, and Service Catalog, with hands-on scripting using Business Rules, Client Scripts, and Script Includes, and I debug issues using logs, execution order, and platform diagnostic tools.”
+6. Common Interview Follow-Up Questions
+Business Rule vs Client Script?
+UI Policy vs Client Script?
+Before vs After Business Rules?
+How do ACLs impact scripts?
+How do you troubleshoot a slow form?
+
+
+*************************************
+* How do you debug JavaScript code? *
+************************************
+
+Here’s a comprehensive, interview-ready explanation of how to debug JavaScript code, including tools, techniques, and best practices.
+
+1. Use Browser Developer Tools
+All modern browsers have built-in developer tools (Chrome DevTools, Firefox DevTools, Edge DevTools).
+Key Features
+Console
+console.log("Debug message", variable);
+console.error("Error occurred", error);
+console.warn("Warning");
+console.table(arrayOrObject);
+Breakpoints
+Pause execution at a specific line to inspect variables.
+Step through code line by line (Step Over, Step Into, Step Out).
+Watch Expressions
+Monitor variable values in real time.
+Call Stack
+See the sequence of function calls that led to the current point.
+Network Tab
+Inspect AJAX requests, responses, and status codes.
+
+2. Use debugger Statement
+Insert debugger directly in the code to trigger a breakpoint:
+function calculate(a, b) {
+  debugger; // pauses here when DevTools open
+  return a + b;
+}
+
+3. Handle Errors Gracefully
+Use try–catch to capture runtime errors:
+try {
+  riskyOperation();
+} catch (error) {
+  console.error("Error occurred:", error);
+}
+Useful for asynchronous code and preventing app crashes
+Log detailed error information for analysis
+
+4. Debugging Asynchronous Code
+Promises
+fetch("/api/data")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+Async/Await
+async function loadData() {
+  try {
+    const res = await fetch("/api/data");
+    const data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Failed to load data", error);
+  }
+}
+Use console.log or breakpoints to verify asynchronous flow
+Be careful with nested callbacks (callback hell)
+
+5. Common Debugging Techniques
+Simplify the problem – isolate code snippets to test individually.
+Check variable types – JavaScript is loosely typed; type issues are common.
+Step through loops and conditions – watch for off-by-one errors.
+Validate DOM elements – make sure your selectors are correct:
+const el = document.querySelector("#myId");
+console.log(el);
+Test in multiple browsers – rendering and API behavior can differ.
+
+6. Automated Debugging Tools
+Linting: ESLint catches syntax errors and common bugs before runtime.
+Unit Testing: Jest, Mocha, or Cypress can help identify failing logic.
+Type Checking: TypeScript or JSDoc reduces runtime type errors.
+7. Best Practices
+Avoid console.log spamming – use breakpoints for complex debugging.
+Keep code modular for easier isolation.
+Write clear error messages and log context.
+Always test after changes to ensure the bug is fixed and nothing else is broken.
+One-Sentence Interview Answer
+“I debug JavaScript using browser DevTools with breakpoints and console logs, debugger statements, try–catch blocks, and by isolating code, inspecting asynchronous flows, and validating DOM interactions to efficiently identify and fix issues.”
+
+

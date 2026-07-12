@@ -1,0 +1,45 @@
+*****Q1. Do you have any exposure to backend development with Ruby on Rails or Node.js ?
+Yes, I have hands-on experience with backend development, particularly using Node.js and TypeScript. I also have extensive experience with the Ruby on Rails MVC architecture.
+
+*****Q2. Do you have any exposure to cloud technologies (AWS or GCP or Azure) OR any exposure to Kubernetes (k8s) to manage backend services?
+
+*****Q3. Bonus nice-to-have: SQL, NoSQL, React Native or native mobile development (android / ios), Istio, Teraform, Java, Go. Let us know if you have any experience or exposure to these topics
+
+*****Q4. Do you have experience in the Gaming Industry? (or alternatively - experience with Unity and/or a passion for building services for games?) 
+While I don’t have direct experience in the gaming industry, I do have a strong background in building scalable, high-performance applications and APIs—skills that are highly transferable to game backend services. I’ve worked with technologies like Node.js, TypeScript, React, PostgreSQL, Redis, and Kubernetes, which are commonly used to support multiplayer game services, leaderboards, player matchmaking, and real-time data sync.
+
+In addition, I’ve explored Unity on a personal level out of curiosity and interest in interactive and immersive applications. I’m passionate about systems that require low latency, real-time communication, and rich user experiences—all core elements of game development.
+
+I’d be genuinely excited to apply my experience to the gaming world, and I’m always eager to learn new tools or engines if it means delivering a great player experience.
+
+*****Q5. How comfortable are you with system design?
+I’m very comfortable with system design and have had multiple opportunities to design scalable, maintainable, and performant systems from the ground up.
+
+For example, I architected and developed a RESTful partner portal application that handled deal registrations for up to 10,000 units. This involved designing the system’s end-to-end flow, including front-end architecture using React (Hooks), Redux, and Bootstrap, and a backend stack using PHP Laravel and PostgreSQL. I accounted for authentication, authorization, API scalability, and data integrity throughout the design.
+
+I’ve also worked with containerized microservices deployed on Kubernetes, and integrated with AWS components, factoring in things like high availability, caching strategies (Redis), and asynchronous task processing to ensure performance under load.
+
+I enjoy thinking through data modeling, API structure, fault tolerance, and tradeoffs between different system components. I also practice writing design docs and discussing trade-offs with cross-functional teams, so collaboration is a core part of my design approach.
+
+Let me know if you'd like a specific system design example or architecture diagram!
+
+*****Q6. Are you an active gamer? Why are you interested in Skillz?
+Yes, I’m an active gamer, and gaming has been a passion of mine for years. I appreciate games that challenge both my strategic thinking and reflexes, and I enjoy the immersive experience they offer. As an active gamer, I find Skillz’s unique combination of skill-based competition and real-money gaming especially appealing.
+
+I’m interested in Skillz because it brings together technology, gaming, and competition in a way that allows players to leverage their skills rather than relying solely on chance. The idea of creating an ecosystem where developers can build engaging, competitive games, and players can test their abilities in a fair environment really resonates with me. I also admire how Skillz offers both a fun, social experience and an opportunity to turn gaming into a rewarding activity.
+
+Being a gamer myself, I can bring a player’s perspective to the development of engaging, user-centered gaming experiences while also leveraging my technical expertise to improve the platform’s performance and scalability.
+
+*****Q7. What is your favorite Skillz game? (bonus)
+I’ve enjoyed exploring a few Skillz games, but 21 Blitz really stands out. It’s a clever mix of Blackjack and Solitaire, which keeps things strategic yet fast-paced. I like how it rewards quick thinking and planning rather than just random luck, which aligns with Skillz's whole mission of skill-based competition. Plus, the UI is clean and responsive, which I really appreciate as someone with a background in user experience and front-end performance.
+
+Even beyond a specific game, what impresses me is how Skillz provides a framework that enables developers to build engaging, competitive mobile experiences—it’s exciting to think about being part of the platform that makes all of that possible.
+
+
+
+
+Describe challenging project what was the outcome of your decision and what was so challenging about it.
+  
+
+One of the most challenging projects I led was the transition of our Unified Compute platform from JavaScript to TypeScript. The challenge wasn’t just technical—it was also about team alignment and 
+Push back from some team members. Some team members were resistant to the shift, expressing concerns about losing familiarity with parts of the existing codebase and stepping out of their comfort zones, especially since not everyone had prior experience with TypeScript. Additionally, we were under significant time pressure, with only one quarter—about four months—to complete the migration and deliver a production-ready, bug-free release. I had to strike a balance between upskilling the team quickly and keeping up with our deadlines. Through clear communication, mentoring, and fostering collaboration, we adapted and successfully delivered the project on time, fully converted to TypeScript and with zero critical issues in production. The experience strengthened my leadership skills and showed the importance of aligning a team around a common technical goal.

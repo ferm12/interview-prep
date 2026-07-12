@@ -1,0 +1,134 @@
+1. View
+Equivalent to a <div> in web development.
+Props: style
+
+2. Text
+props:
+style={{ fontSize: 18, color: 'blue' }}
+onPress={() => alert('Pressed')}
+selectable={true}
+
+3. Image
+props:
+style={{ width: 100, height: 100, borderRadius: 10 }}
+source={{ uri: 'https://example.com/image.jpg' }}
+onLoad={() => console.log("Loaded")}
+onError={(e) => console.log("Error", e.nativeEvent)} 
+onLoadStart={() => setLoading(true)}
+onLoadEnd={() => setLoading(false)}
+
+4. ScrollView
+A scrollable container for vertically or horizontally scrollable content.
+contentContainerStyle={{ padding: 20 }}
+style={{ fontSize: 18, color: 'blue' }}
+horizontal
+showsVerticalScrollIndicator={false}
+showsHorizontalScrollIndicator={false}
+onScroll={(e) => console.log(e.nativeEvent.contentOffset.y)}
+scrollEventThrottle={16}
+
+5. TextInput
+For user input fields (login forms, search bars, etc.).
+key={index}
+style={styles.input}
+value={value[index]}
+onChangeText={(text) => onChangeHandler(text, index)}
+onKeyPress={(e) => onKeyPressHandler(e, index)}
+keyboardType="number-pad" (default, numeric, email-address, phone-pad, etc.)
+maxLength={1}
+ref={(el) => refs.current[index] = el}
+placeholder='Place holder'
+secureTextEntry – Hides the text for password inputs.
+editable – If false, makes the input read-only.
+
+
+6. TouchableOpacity
+A touchable element that fades on press.
+Props:
+activeOpacity
+onPress={() => setCount(count + 1)}
+onLongPress={() => Alert.alert("Long Pressed!")}
+Triggered when the user presses and holds.
+disabled
+Disables all interactions when true.
+
+7. Pressable
+A more modern, flexible replacement for touchables.
+Handles complex button interactions.
+
+8. FlatList
+Efficiently renders long lists.
+Uses recycling similar to RecyclerView in Android.
+data={[1, 2, 3]}
+keyExtractor={(item) => item.id}
+renderItem={({ item }) => (
+  <View style={{ padding: 16}}>
+   <Text>{item.title}</Text>
+  </View>
+)}
+ListEmptyComponent={<Text>No items</Text>}
+ListHeaderComponent={<Text style={{ fontSize: 20 }}>Fruits</Text>}
+onEndReached={() => console.log("Reached end")}
+onEndReachedThreshold={0.5}
+
+9. SectionList
+Like FlatList but supports grouped sections.
+
+10. SafeAreaView
+Ensures content is not hidden behind notches or system bars (iPhone X+).
+
+11. StatusBar
+Customize the status bar style (light, dark, hidden).
+
+
+
+Real DOM (Document Object Model)
+The Real DOM is what browsers use to represent the structure of HTML pages.
+
+Virtual DOM
+It’s a lightweight, in-memory representation of the Real DOM (or UI tree in React Native).
+
+Shadow DOM
+The Shadow DOM is a browser feature, mainly used for Web Components.
+It allows encapsulation of styles and DOM structure, so the inner DOM of a component is isolated.
+Example: A <my-button> Web Component can have its own internal DOM and CSS that doesn’t leak out.
+React Native doesn’t use Shadow DOM because it doesn’t run in a browser—it renders to native UI components.
+
+
+1. ScrollView
+ScrollView renders all child components at once—even the ones off-screen.
+✅ Use ScrollView when:
+The list is small (e.g., < 20 items)
+You have static or simple content
+You don’t need windowing/virtualization
+
+2. FlatList
+FlatList is optimized for large lists.
+It renders only what’s visible on the screen using virtualization.
+✅ Use FlatList when:
+You have big datasets
+You want lazy loading / infinite scroll
+Better performance and memory usage is needed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
