@@ -992,18 +992,18 @@ console.log(compressBad(str));
 
 /*******************************************************************************************************************************************/
 // remove duplicates from an Array
-let arr = [1, 2, 3, 4, 5, 1, 2, 3];
-let uniqueArr = [];
-for (let i = 0; i < arr.length; i++) {
-    if (!uniqueArr.includes(arr[i])) {
-        uniqueArr.push(arr[i]);
-    }
-}
-console.log(
-    'new Set(arr)',
-    new Set(arr)
-)
-console.log(uniqueArr); // [1, 2, 3, 4, 5]
+// let arr = [1, 2, 3, 4, 5, 1, 2, 3];
+// let uniqueArr = [];
+// for (let i = 0; i < arr.length; i++) {
+//     if (!uniqueArr.includes(arr[i])) {
+//         uniqueArr.push(arr[i]);
+//     }
+// }
+// console.log(
+//     'new Set(arr)',
+//     new Set(arr)
+// )
+// console.log(uniqueArr); // [1, 2, 3, 4, 5]
 
 /*******************************************************************************************************************************************/
 // let arr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 1, 6];
@@ -1333,17 +1333,17 @@ console.log(uniqueArr); // [1, 2, 3, 4, 5]
 
 /*******************************************************************************************************************************************/
 
-console.log('Start'); // Start
+// console.log('Start'); // Start
 
-Promise.resolve().then(() => console.log('Promise 1'));
+// Promise.resolve().then(() => console.log('Promise 1'));
 
-setTimeout(() => console.log('Timeout 1'), 0);
+// setTimeout(() => console.log('Timeout 1'), 0);
 
-Promise.resolve().then(() => console.log('Promise 2'));
+// Promise.resolve().then(() => console.log('Promise 2'));
 
-setTimeout(() => console.log('Timeout 2'), 0);
+// setTimeout(() => console.log('Timeout 2'), 0);
 
-console.log('End');
+// console.log('End');
 
 // Start
 // End 
@@ -1451,48 +1451,67 @@ console.log('End');
 // aabbbccccaa return c becuase repeated 4 times
 // yyyzzyyyaaa return ya becuase repeated 3 times
 
-function maxCr(str){
-    if (!str) return '';
+// function maxCr(str){
+//     if (!str) return '';
 
-    let maxCount= 0;
-    let result = '';
-    let currentChar = str[0];
-    let currentCount = 1;
+//     let maxCount= 0;
+//     let result = '';
+//     let currentChar = str[0];
+//     let currentCount = 1;
 
-    for (let i = 1; i < str.length; i++) {
-        if (str[i] === currentChar) {
-            currentCount++;
-        } else {
-            if (currentCount > maxCount) {
-                maxCount = currentCount;
-                result = currentChar;
-            } else if (currentCount === maxCount) {
-                result += currentChar;
-            }
-            currentChar = str[i];
-            currentCount = 1;
-        }
-    }
-    if (currentCount > maxCount) {
-        result = currentChar;
-    }else if (currentCount === maxCount) {
-        result += currentChar;
-    }
+//     for (let i = 1; i < str.length; i++) {
+//         if (str[i] === currentChar) {
+//             currentCount++;
+//         } else {
+//             if (currentCount > maxCount) {
+//                 maxCount = currentCount;
+//                 result = currentChar;
+//             } else if (currentCount === maxCount) {
+//                 result += currentChar;
+//             }
+//             currentChar = str[i];
+//             currentCount = 1;
+//         }
+//     }
+//     if (currentCount > maxCount) {
+//         result = currentChar;
+//     }else if (currentCount === maxCount) {
+//         result += currentChar;
+//     }
 
-    let newStr = [...new Set(result)].join('');
-    return newStr;
-
-
+//     let newStr = [...new Set(result)].join('');
+//     return newStr;
 
 
-}
 
-console.log(
-    maxCr('yyyzzyyyaaa')
 
-)
-console.log(
-maxCr('aabbbccccaa')
-)
+// }
+
+// console.log(
+//     maxCr('yyyzzyyyaaa')
+
+// )
+// console.log(
+// maxCr('aabbbccccaa')
+// )
 
 /*******************************************************************************************************************************************/
+
+function longestEvenWord(str){
+    let words = str.split(" ");
+    let result = "00";
+    let maxLength = 0;
+    for (let word of words) {
+        if (word.length % 2 === 0 && word.length > maxLength) {
+            maxLength = word.length;
+            result = word;
+        }
+    }
+    // if (result === '') {
+    //     return '00';
+    // }
+    return result;
+}
+
+console.log(longestEvenWord('You can do it'));
+console.log(longestEvenWord('You can doo iti'));
