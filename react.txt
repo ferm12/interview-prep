@@ -86,6 +86,11 @@ Export default class SampleComponent extends Component{
 
 }
 
+what are the 3 life compoment life cycles
+1. mount 
+2. update
+3. unmount
+
 ======================================================================================================
 useState
 function fn(){}

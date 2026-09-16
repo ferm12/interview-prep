@@ -1454,11 +1454,20 @@ console.log(compressBad(str));
 // function maxCr(str){
 //     if (!str) return '';
 
+<<<<<<< HEAD
 //     let maxCount= 0;
 //     let result = '';
 //     let currentChar = str[0];
 //     let currentCount = 1;
 
+=======
+//     let result = '';
+//     let maxCount= 0;
+
+//     let currentChar = str[0];
+//     let currentCount = 1;
+
+>>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
 //     for (let i = 1; i < str.length; i++) {
 //         if (str[i] === currentChar) {
 //             currentCount++;
@@ -1488,6 +1497,7 @@ console.log(compressBad(str));
 // }
 
 // console.log(
+<<<<<<< HEAD
 //     maxCr('yyyzzyyyaaa')
 
 // )
@@ -1505,8 +1515,29 @@ function longestEvenWord(str){
         if (word.length % 2 === 0 && word.length > maxLength) {
             maxLength = word.length;
             result = word;
+=======
+//     "maxCr('yyyzzyyyaaa') =>",
+//     maxCr('yyyzzyyyaaa')
+// )
+// console.log(
+//     "maxCr('aabbbccccaa') =>",
+//     maxCr('aabbbccccaa')
+// )
+
+/*******************************************************************************************************************************************/
+const arr = [1, 3, 5, 9, 4];
+
+function selectionSort(arr){
+    let N = arr.length;
+    for (let i = 0; i < N; i++){
+        let lowest = i;
+        for (let j = i+1; j < N; j++){
+            if(arr[j] < arr[lowest]) lowest = j;
+>>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
         }
+        [arr[lowest], arr[i]] = [arr[i], arr[lowest]];
     }
+<<<<<<< HEAD
     // if (result === '') {
     //     return '00';
     // }
@@ -1515,3 +1546,9 @@ function longestEvenWord(str){
 
 console.log(longestEvenWord('You can do it'));
 console.log(longestEvenWord('You can doo iti'));
+=======
+}
+
+selectionSort(arr),
+console.log('arr =>',arr)
+>>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
