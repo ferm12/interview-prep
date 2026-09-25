@@ -1459,6 +1459,14 @@ console.log(uniqueArr); // [1, 2, 3, 4, 5]
 //     let currentChar = str[0];
 //     let currentCount = 1;
 
+=======
+//     let result = '';
+//     let maxCount= 0;
+
+//     let currentChar = str[0];
+//     let currentCount = 1;
+
+>>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
 //     for (let i = 1; i < str.length; i++) {
 //         if (str[i] === currentChar) {
 //             currentCount++;

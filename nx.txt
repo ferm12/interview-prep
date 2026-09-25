@@ -1,9 +1,27 @@
 Npx create-nx-workspace@latest
 
+see help on specified command 
+npx nx <command> help 
 
 
 npx nx list @nx/react
 
-npx nx g @nx/react:app apps/<name> // apps/<name> is the path
+generarte react app at specified path "apps/<name>"
+npx nx g @nx/react:app apps/<name> 
 
+serve specified app-name
 npx nx serve <app-nam>
+
+runt test for the hecker-mart app
+npx nx test @apps/hacker-mart
+
+See available targets for an app
+npx nx run-many -t test
+
+Jest is wired via @nx/jest for apps that have a jest.config.ts (e.g. hacker-mart, filteredSearchDebouncer, otp). Spec files live next to the code as *.spec.tsx.
+npx nx show project @apps/filteredSearch
+
+Useful flags:
+
+npx nx test @apps/hacker-mart --watch
+npx nx test @apps/hacker-mart --coverage

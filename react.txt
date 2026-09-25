@@ -1,4 +1,29 @@
-	View
+
+
+                                               +------+------+
+                    +--------------------------|    Action   |<--------------------------+
+                    |                          +------+------+                           | 
+                    V                                                                    V
+            		    +--------------+     +---------------+     +--------------+      +---------+
+            			  | Dispatch	   | --> |    Middleware | --> |     store     | --> |  View   |
+              	    +--------------+     +---------------+     +--------------+      +---------+
+          					                     Saga, thunk           Reducer -> state
+         
+
+
+
+                                               +------+------+
+                    +--------------------------|    Action   |<--------------------------+
+                    |                          +------+------+                           | 
+                    V                                                                    V
+            		    +--------------+     +---------------+     +--------------+      +---------+
+            			  | Dispatch	   | --> |    Middleware | --> |     store     | --> |  View   |
+              	    +--------------+     +---------------+     +--------------+      +---------+
+          					                     Saga, thunk           Reducer -> state
+
+  
+           
+View
 The basic building block for layout, similar to a <div> in web.
 
 Text
@@ -34,30 +59,6 @@ Displays content above an enclosing view (popups, dialogs).
 ActivityIndicator
 Shows a loading spinner.
 Flux
-
-         
-                                                                         +------+------+
-                                                            +------------|    Action   |<------------+
-                                                            |            +------+------+             |
-                                                            V                   |                    |
-            			+------+------+	     +-------------+     +--------------+     +--------------+
-            			|   Action.   | -->  | Dispatcher  | --> |    Store     | --> |     View     |
-            			+------+------+	     +------+------+     +--------------+     +--------------+
-
-
-
-                                                                         +------+------+
-                                                            +------------|    Action   |<------------+
-                                                            |            +------+------+             |
-                                                            V                   |                    |
-            			+------+------+	     +-------------+     +---------------+     +--------------+
-            			|   Action.   | -->  | Dispatch	   | --> |    Store      | --> |     View     |
-            			+------+------+	     +------+------+     +---------------+     +--------------+
-          						Middleware ->     Reducer -> state
-							Saga
-							thunk
-           
-
 Component	Purpose
 Action		Plain objects or functions that describe a user event or an intention to change state (e.g., "ADD_TODO").
 Dispatcher	A central hub that receives actions and forwards them to the relevant stores.
@@ -325,5 +326,90 @@ onTransitionEnd
 
 
 
+======================================================================================================
+TREE SHAKING
+Tree shaking is the bundler dropping unused exports from the JS you ship. React does not do it. Webpack, Rollup, esbuild, and Vite do, in a production build, using static ES import/export.
+It is dead-code elimination, not code splitting. React.lazy / import() splits when code loads. Tree shaking deletes code you never import.
 
-	
+======================================================================================================
+
+race condition: api-call-1, then api-call-2. 2 returns first, then 1 returns and overwrites the UI with the wront data. 
+
+solution:
+useEffect(() => {
+  let cancelled = false;
+  fetch(`/api/v1/enpoint`)
+    .then((r) => r.json())
+    .then((json) => {
+      if (!cancelled) setData(json.data);
+    });
+  return () => {
+    cancelled = true;
+  };
+}, [sprintId]);
+
+using setTimeout
+useEffect(() => {
+  const id = setTimeout(() => {
+    search(query);
+  }, 1000);
+  return () => clearTimeout(id);
+}, [query]);
+Every new query clears the previous 1000ms wait and starts over. Only the last pause actually searches.
+
+Cleanup fn runs before the next effect (and on unmount). The slow response is dropped. 
+The network request may still finish.
+Each effect run closes over its own cancelled. That is why the old request cannot flip the new flag, 
+and the new request is not cancelled by the old cleanup.
+======================================================================================================
+Reconciliation is how React decides what to change in the UI after a render. You return a new element tree; React diffs it against the previous tree and updates only what changed in the DOM (or native views).
+
+It is not “wipe the screen and rebuild.” It is diff + patch.
+
+The loop
+State/props change → React renders (calls your function, gets new JSX).
+Reconcile: compare new tree vs old tree.
+Commit: apply the minimal DOM updates (insert, delete, update attributes, move).
+Render can be thrown away (Concurrent Mode). Commit is what the user sees.
+======================================================================================================
+Lifting state means moving state up to the closest parent that needs it, then passing data down as props and updates down as callbacks. Siblings never share useState directly.
+
+Here two children both need the same query: the input writes it, the list reads it. The state lives in FilterableList, not in SearchBox.
+
+
+function FilterableList({ items }: { items: string[] }) {
+  const [query, setQuery] = useState("");
+  const visible = items.filter((item) =>
+    item.toLowerCase().includes(query.toLowerCase())
+  );
+  return (
+    <>
+      <SearchBox query={query} onQueryChange={setQuery} />
+      <ResultList items={visible} />
+    </>
+  );
+}
+function SearchBox({
+  query,
+  onQueryChange,
+}: {
+  query: string;
+  onQueryChange: (value: string) => void;
+}) {
+  return (
+    <input
+      value={query}
+      onChange={(e) => onQueryChange(e.target.value)}
+      placeholder="Filter"
+    />
+  );
+}
+function ResultList({ items }: { items: string[] }) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
