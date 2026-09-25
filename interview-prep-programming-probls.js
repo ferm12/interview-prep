@@ -992,18 +992,18 @@ console.log(compressBad(str));
 
 /*******************************************************************************************************************************************/
 // remove duplicates from an Array
-// let arr = [1, 2, 3, 4, 5, 1, 2, 3];
-// let uniqueArr = [];
-// for (let i = 0; i < arr.length; i++) {
-//     if (!uniqueArr.includes(arr[i])) {
-//         uniqueArr.push(arr[i]);
-//     }
-// }
-// console.log(
-//     'new Set(arr)',
-//     new Set(arr)
-// )
-// console.log(uniqueArr); // [1, 2, 3, 4, 5]
+let arr = [1, 2, 3, 4, 5, 1, 2, 3];
+let uniqueArr = [];
+for (let i = 0; i < arr.length; i++) {
+    if (!uniqueArr.includes(arr[i])) {
+        uniqueArr.push(arr[i]);
+    }
+}
+console.log(
+    'new Set(arr)',
+    new Set(arr)
+)
+console.log(uniqueArr); // [1, 2, 3, 4, 5]
 
 /*******************************************************************************************************************************************/
 // let arr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 1, 6];
@@ -1454,20 +1454,11 @@ console.log(compressBad(str));
 // function maxCr(str){
 //     if (!str) return '';
 
-<<<<<<< HEAD
 //     let maxCount= 0;
 //     let result = '';
 //     let currentChar = str[0];
 //     let currentCount = 1;
 
-=======
-//     let result = '';
-//     let maxCount= 0;
-
-//     let currentChar = str[0];
-//     let currentCount = 1;
-
->>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
 //     for (let i = 1; i < str.length; i++) {
 //         if (str[i] === currentChar) {
 //             currentCount++;
@@ -1497,7 +1488,6 @@ console.log(compressBad(str));
 // }
 
 // console.log(
-<<<<<<< HEAD
 //     maxCr('yyyzzyyyaaa')
 
 // )
@@ -1515,40 +1505,61 @@ function longestEvenWord(str){
         if (word.length % 2 === 0 && word.length > maxLength) {
             maxLength = word.length;
             result = word;
-=======
-//     "maxCr('yyyzzyyyaaa') =>",
-//     maxCr('yyyzzyyyaaa')
-// )
-// console.log(
-//     "maxCr('aabbbccccaa') =>",
-//     maxCr('aabbbccccaa')
-// )
-
-/*******************************************************************************************************************************************/
-const arr = [1, 3, 5, 9, 4];
-
-function selectionSort(arr){
-    let N = arr.length;
-    for (let i = 0; i < N; i++){
-        let lowest = i;
-        for (let j = i+1; j < N; j++){
-            if(arr[j] < arr[lowest]) lowest = j;
->>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
         }
-        [arr[lowest], arr[i]] = [arr[i], arr[lowest]];
     }
-<<<<<<< HEAD
-    // if (result === '') {
-    //     return '00';
-    // }
     return result;
 }
 
 console.log(longestEvenWord('You can do it'));
 console.log(longestEvenWord('You can doo iti'));
-=======
-}
 
-selectionSort(arr),
-console.log('arr =>',arr)
->>>>>>> 59f55dc9df452ffeab9a35150be2e85be9a536ed
+/*******************************************************************************************************************************************/
+/*
+Reported Toptal problems
+
+A few problems that show up repeatedly in public candidate-report aggregations are:
+
+Image Smoother — Easy
+Matrix/2D array traversal
+Calculate the average of neighboring cells.
+Good practice for boundary conditions and nested loops.
+Airplane Seat Assignment Probability — Medium
+Probability + dynamic programming/recursion.
+Tests whether you can identify the state and reason about recursive outcomes.
+String Compression II — Hard
+Dynamic programming + strings.
+Find the minimum compressed length after deleting up to k characters.
+This is substantially harder than a typical "easy" string problem.
+*/
+
+/*
+Toptal's own algorithm interview material also emphasizes topics such as:
+Hash tables
+Binary search
+Sorting
+Divide and conquer
+Recursion
+Complexity analysis
+Perfect hashing
+Matrix/geometry problems
+Rectangle intersection
+Anagram detection
+Fast exponentiation
+*/
+
+/*
+Given your Senior Full-Stack/React/TypeScript background, I would focus on these patterns rather than trying to memorize Toptal-specific questions:
+Priority	Topic	Example
+🔴 High	Hash Map	Two Sum, anagrams, frequency counting
+🔴 High	Arrays	Two pointers, sliding window
+🔴 High	Matrix	Image Smoother, spiral traversal
+🔴 High	Strings	String compression, substring problems
+🔴 High	Binary Search	Search/optimization problems
+🔴 High	Recursion	Tree/graph traversal
+🟠 Medium	Dynamic Programming	1D/2D DP
+🟠 Medium	Linked Lists	Reverse, cycle detection
+🟠 Medium	Stack/Queue	Valid parentheses, monotonic stack
+🟠 Medium	Trees	DFS/BFS
+🟠 Medium	Graphs	BFS/DFS, shortest path
+🟡 Lower	Probability/Math	Airplane Seat Assignment
+*/
