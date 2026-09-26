@@ -1571,3 +1571,315 @@ Priority	Topic	Example
 🟠 Medium	Graphs	BFS/DFS, shortest path
 🟡 Lower	Probability/Math	Airplane Seat Assignment
 */
+
+
+/*******************************************************************************************************************************************/
+
+// Utility functions for managing draft bookings in localStorage
+const DRAFT_BOOKINGS_PREFIX = 'draft_bookings_';
+
+/**
+* Get the localStorage key for a specific user
+*/
+const getDraftBookingsKey = (userId) => {
+    if (!userId) {
+        throw new Error('User ID is required to access draft bookings');
+    }
+    return `${DRAFT_BOOKINGS_PREFIX}${userId}`;
+};
+
+/**
+Get draft bookings for a specific user from localStorage
+*/
+export const getDraftBookings = (userId) => {
+    try {
+        if (!userId) {
+            console.error('Cannot get draft bookings without user ID');
+            return [];
+        }
+        const key = getDraftBookingsKey(userId);
+        const drafts = localStorage.getItem(key);
+        return drafts ? JSON.parse(drafts) : [];
+    } catch (error) {
+        console.error('Error reading draft bookings:', error);
+        return [];
+    }
+};
+
+/*
+* Save draft booking for a specific user
+*/
+export const saveDraftBooking = (userId, bookingData) => {
+    try {
+        if (!userId) {
+            throw new Error('User ID is required to save draft booking');
+        }
+        const drafts = getDraftBookings(userId);
+        // Generate unique ID based on timestamp and apartment
+        const draftId = `draft_${bookingData.apartmentId}_${Date.now()}`;
+
+        const newDraft = {
+            id: draftId,
+            ...bookingData,
+            savedAt: new Date().toISOString(),
+            status: 'draft'
+        };
+
+        drafts.push(newDraft);
+
+        const key = getDraftBookingsKey(userId);
+        localStorage.setItem(key, JSON.stringify(drafts));
+
+        return newDraft;
+    } catch (error) {
+        console.error('Error saving draft booking:'
+            , error);
+        throw error;
+    }
+};
+
+/**
+* Remove a draft booking by ID for a specific user
+*/
+export const removeDraftBooking = (userId, draftId) => {
+    try {
+        if (!userId) {
+            console.error('User ID is required to remove draft booking');
+            return false;
+        }
+        const drafts = getDraftBookings(userId);
+        const updatedDrafts = drafts.filter(draft => draft.id !== draftId);
+        const key = getDraftBookingsKey(userId);
+        localStorage.setItem(key, JSON.stringify(updatedDrafts));
+        return true;
+    } catch (error) {
+        console.error('Error removing draft booking:', error);
+        return false;
+    }
+};
+
+/**
+* Get a specific draft booking by ID for a specific user
+*/
+export const getDraftBookingById = (userId, draftId) => {
+    if (!userId) return null;
+
+    const drafts = getDraftBookings(userId);
+    return drafts.find(draft => draft.id === draftId);
+};
+
+/**
+* Validate draft booking dates (check if still in future)
+*/
+export const isDraftValid = (draft) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const checkInDate = new Date(draft.checkIn);
+    // Check if check-in date is in the future
+    return checkInDate >= today;
+};
+
+/**
+* Remove drafts that match a completed booking for a specific user
+*/
+export const removeDraftByBookingDetails = (userId, apartmentId, checkIn, checkOut) => {
+    try {
+        if (!userId) {
+            console.error('User ID is required to remove draft booking');
+            return false;
+        }
+        const drafts = getDraftBookings(userId);
+        const updatedDrafts = drafts.filter(draft => {
+            const matchesApartment = draft.apartmentId === apartmentId;
+            const matchesCheckIn = draft.checkIn === checkIn;
+            const matchesCheckOut = draft.checkOut === checkOut;
+
+            // Remove if all details match
+            return !(matchesApartment && matchesCheckIn && matchesCheckOut);
+        });
+
+        const key = getDraftBookingsKey(userId);
+        localStorage.setItem(key, JSON.stringify(updatedDrafts));
+        return true;
+    } catch (error) {
+        console.error('Error removing matching draft:', error);
+        return false;
+    }
+};
+
+
+// In ApartmentDetail.jsx - implement the handleSaveForLater function
+const handleSaveForLater = () => {
+    const userID = auth?.user?.id;
+    const username = auth?.user?.username;
+
+    if (!userID) {
+        navigate("/login");
+        return;
+    }
+
+    const isValidDates = checkIn !== "" && checkOut !== "" &&
+        new Date(checkIn) < new Date(checkOut) &&
+        new Date(checkIn) >= new Date(getTodayDate());
+
+    if (!isValidDates) {
+        toast.error('Please select valid check-in and check-out dates.');
+        return;
+    }
+
+    if (totalPrice <= 0) {
+        toast.error('Please select valid dates for your stay');
+        return;
+    }
+
+    try {
+        const draftData = {
+            userId: userID,
+            username: username,
+            apartmentId: apartment._id,
+            title: apartment.title,
+            checkIn: checkIn,
+            checkOut: checkOut,
+            guests: guests,
+            totalPrice: totalPrice,
+        };
+
+        // Pass userId as first parameter
+        saveDraftBooking(userID, draftData);
+        toast.success("Booking saved for later! Visit 'My Bookings' to complete it.");
+
+        // Optional: Reset form or navigate
+        // navigate("/account/user");
+    } catch (error) {
+        toast.error('Failed to save booking. Please try again.');
+        console.error('Error saving draft:', error);
+    }
+};
+
+
+// In DraftBookings.js - implement these functions
+// Load and display user's saved drafts
+const loadDrafts = () => {
+    if (!userId) return;
+
+    // Pass userId to get user-specific drafts
+    const allDrafts = getDraftBookings(userId);
+
+    // Filter out expired drafts and validate
+    const validDrafts = allDrafts.filter(draft => isDraftValid(draft));
+
+    // If some drafts were invalid, update localStorage
+    if (validDrafts.length !== allDrafts.length) {
+        const key = `draft_bookings_${userId}`;
+        localStorage.setItem(key, JSON.stringify(validDrafts));
+    }
+    setDrafts(validDrafts);
+};
+
+// Navigate user to payment with draft data
+const handleCompletBooking = (draft) => {
+    // Navigate to payment page with draft data
+    const bookingData = {
+        userId: draft.userId,
+        username: draft.username,
+        apartmentId: draft.apartmentId,
+        title: draft.title,
+        checkIn: draft.checkIn,
+        checkOut: draft.checkOut,
+        guests: draft.guests,
+        totalPrice: draft.totalPrice,
+        draftId: draft.id, // Pass draft ID to remove it after payment
+    };
+    navigate("/pay"
+        , { state: { bookingData } });
+};
+
+// Remove unwanted draft
+const handleDeleteDraft = (draftId, draftTitle) => {
+    if (!userId) return;
+
+    const confirmed = window.confirm(
+        `Are you sure you want to delete the draft for "${draftTitle}"?`
+    );
+
+    if (!confirmed) return;
+
+    // Pass userId to remove user-specific draft
+    const success = removeDraftBooking(userId, draftId);
+    if (success) {
+        setDrafts(drafts.filter(draft => draft.id !== draftId));
+        toast.success("Draft booking deleted.");
+    } else {
+        toast.error("Failed to delete draft.");
+    }
+};
+
+// The UserAccount component manages the bookings dashboard
+// Candidate needs to integrate the DraftBookings component
+const UserAccount = () => {
+    const [activeTab, setActiveTab] = useState("bookings");
+
+    const handleTabSelect = (tab) => {
+        setActiveTab(tab);
+    };
+    return (
+        <div className="account-container">
+            <Tabs
+                className="dashboard-tabs"
+                activeKey={activeTab}
+                onSelect={handleTabSelect}
+                justify
+            >
+                <Tab eventKey="bookings" title="Bookings">
+                    <UserDashboard />
+                </Tab>
+                <Tab eventKey="drafts" title="Draft Bookings">
+                    <DraftBookings />
+                </Tab>
+            </Tabs>
+        </div>
+    );
+};
+
+
+// In the payment component (CreditCard.js), after successful booking:
+const handleBookingSubmit = async () => {
+    try {
+        // ... existing booking logic ...
+
+        const response = await fetch(`${baseURL}/api/bookings`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${auth.token}`,
+            },
+            body: JSON.stringify(bookingDetails)
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log("Booking created successfully:", responseData);
+
+            // Clean up draft booking if it exists
+            const userId = bookingData.userId;
+
+            if (bookingData.draftId) {
+                // Remove by draft ID (pass userId)
+                removeDraftBooking(userId, bookingData.draftId);
+            } else {
+                // Also try to remove by matching details (pass userId)
+                removeDraftByBookingDetails(
+                    userId,
+                    bookingData.apartmentId,
+                    bookingData.checkIn,
+                    bookingData.checkOut
+                );
+            }
+            setPaymentSuccess(true);
+        } else {
+            // ... error handling ...
+        }
+    } catch (error) {
+        // ... error handling ...
+    }
+};
